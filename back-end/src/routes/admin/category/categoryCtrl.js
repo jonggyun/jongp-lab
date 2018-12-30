@@ -1,4 +1,5 @@
 const Category = require('schemas/category');
+const Post = require('schemas/post');
 const status = require('http-status');
 
 // 카테고리 리스트 가져오기.
@@ -47,6 +48,7 @@ exports.createCategory = async (req, res) => {
 // 카테고리 수정
 exports.modifyCategory = async (req, res) => {
   try {
+    // $set을 하지 않으면 부분 변경이 아닌 전체가 req.body로 바뀐다. 주의!!
     await Category.findByIdAndUpdate(req.body._id, { $set: req.body });
     res.sendStatus(status.ACCEPTED);
   } catch (err) {
@@ -62,4 +64,27 @@ exports.removeCategory = async (req, res) => {
     console.log(err);
   }
 };
-exports.getCategoryByPost = () => {};
+
+// 카테고리별 포스팅리스트
+/**
+ * populate 내부의 조건과 맞는 내용을 뽑으려면 filter함수를 사용해서 처리해야하는 듯.
+ * 더 좋은 내용을 찾게 되면 수정하자.
+ */
+exports.getPostByCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    await Post.find()
+      .populate('category')
+      .exec((err, posts) => {
+        const postList = posts.filter(post => {
+          if (post.category.id === categoryId) {
+            return post;
+          }
+        });
+        res.json(postList);
+      });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
+};
