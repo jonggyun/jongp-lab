@@ -10,4 +10,4 @@ router.put('/:postId', postCtrl.modify);
 router.delete('/:postId', postCtrl.remove);
 router.put('/', postCtrl.moveCategory);
 
-module.exports = post;
+module.exports = router;

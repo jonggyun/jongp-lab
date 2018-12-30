@@ -13,7 +13,7 @@ exports.login = async (req, res, next) => {
         res.sendStatus(status.INTERNAL_SERVER_ERROR);
       }
       hash === true
-        ? res.json({ isLoggedIn: true })
+        ? res.sendStatus(status.OK).json({ isLoggedIn: true })
         : res.sendStatus(status.UNAUTHORIZED);
     });
   } catch (err) {

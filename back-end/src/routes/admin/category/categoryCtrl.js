@@ -11,7 +11,7 @@ exports.getCategory = async (req, res) => {
       res.sendStatus(status.NO_CONTENT);
       return;
     }
-    res.json(list);
+    res.send(list);
   } catch (err) {
     console.log('getCategory', err);
     res.sendStatus(status.BAD_REQUEST);

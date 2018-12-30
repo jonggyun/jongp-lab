@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 const {
   Types: { ObjectId },
 } = Schema;
-const UserSchema = require('./user');
-const CommentSchema = require('./comment');
+const User = require('./user');
+const Comment = require('./comment');
 
 const Post = new Schema({
   id: {
@@ -26,26 +26,22 @@ const Post = new Schema({
     required: false,
   },
   // 유저 스키마 참조
-  writer: UserSchema,
-  // 혹은 참조하는 거니까 이렇게?? 하는게 맞는건가
   writer: {
     type: ObjectId,
     required: true,
-    ref: 'UserSchema',
+    ref: 'User',
   },
   category: {
     type: ObjectId,
     required: true,
-    ref: 'CategorySchema',
+    ref: 'Category',
   },
   createdAt: {
     type: Date,
-    required: true,
     default: Date.now,
   },
   updatedAt: {
     type: Date,
-    required: true,
     default: Date.now,
   },
   thumnail: {
@@ -59,16 +55,15 @@ const Post = new Schema({
   tags: {
     type: [String],
     required: false,
-  }, // mongoDB로 넘어오면서 따로 테이블처리할 필요가 없어짐
-  hashcode: {
-    type: String,
-    required: true,
   },
   public: {
     type: Boolean,
-    equired: true,
+    required: true,
   },
-  comment: [CommentSchema],
+  comment: {
+    type: [Comment],
+    required: false,
+  },
 });
 
 module.exports = mongoose.model('Post', Post);

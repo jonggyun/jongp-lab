@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 8001);
 app.use(morgan('dev'));
 /** body-parser 역할 시작 */
 app.use(express.json());
-// extended: false -> quierystring 모듈 사용, true -> qs 모듈 사용
+// extended: false -> querystring 모듈 사용, true -> qs 모듈 사용
 app.use(express.urlencoded({ extended: false }));
 /** body-parser 역할 끝 */
 
