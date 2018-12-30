@@ -16,12 +16,13 @@ const Category = new Schema({
   order: {
     type: Number,
     required: true,
+    unique: true,
   },
   public: {
     type: Boolean,
     required: true,
   },
-  post: [PostSchema],
+  //post: [PostSchema],
 });
 
 module.exports = mongoose.model('Category', Category);

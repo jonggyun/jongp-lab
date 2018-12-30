@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 
-//const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 const connect = require('./schemas'); // 스키마 연결
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 /** cookie-parser 쿠키 해석 */
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-//app.use('/api', indexRouter);
+app.use('/', indexRouter);
 
 /**
  * 404처리 미들웨어
