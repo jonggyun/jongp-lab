@@ -9,6 +9,7 @@ const app = express();
 connect(); // 몽고디비 연결.
 
 app.set('port', process.env.PORT || 8001);
+app.set({ 'content-type': 'application/json; charset=utf-8' });
 app.use(morgan('dev'));
 /** body-parser 역할 시작 */
 app.use(express.json());
@@ -20,7 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/', indexRouter);
-
 /**
  * 404처리 미들웨어
  * 라우터에서 요청이 처리 되지 않으면 이쪽으로 넘어옴.

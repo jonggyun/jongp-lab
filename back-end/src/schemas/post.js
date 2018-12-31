@@ -4,8 +4,7 @@ const { Schema } = mongoose;
 const {
   Types: { ObjectId },
 } = Schema;
-const User = require('./user');
-const Comment = require('./comment');
+//const Comment = require('./comment');
 
 const Post = new Schema({
   id: {
@@ -60,10 +59,11 @@ const Post = new Schema({
     type: Boolean,
     required: true,
   },
-  comment: {
-    type: [Comment],
-    required: false,
-  },
+  // comment: {
+  //   type: [ObjectId],
+  //   required: false,
+  //   ref: 'Comment',
+  // },
 });
 
 module.exports = mongoose.model('Post', Post);

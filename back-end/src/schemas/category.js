@@ -22,7 +22,6 @@ const Category = new Schema({
     type: Boolean,
     required: true,
   },
-  //post: [PostSchema],
 });
 
 module.exports = mongoose.model('Category', Category);

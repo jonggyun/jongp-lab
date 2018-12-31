@@ -1,14 +1,23 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const {
+  Types: { ObjectId },
+} = Schema;
 
 const Comment = new Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
+  // objectId를 사용해보자.
+  // id: {
+  //   type: Number,
+  //   required: true,
+  //   unique: true,
+  // },
   // 여기는 유저랑 안겹침
+  postId: {
+    type: ObjectId,
+    required: true,
+    ref: 'Post',
+  },
   writer: {
     type: String,
     required: true,
@@ -37,6 +46,5 @@ const Comment = new Schema({
   },
 });
 
-exports.CommentSchema = Comment;
-
-//module.exports = mongoose.model('Comment', Comment);
+//exports.Comment = Comment;
+module.exports = mongoose.model('Comment', Comment);

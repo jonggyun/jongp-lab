@@ -30,6 +30,7 @@ exports.write = async (req, res) => {
     // writer랑 category의 obejctid를 구한 뒤 insert
     let { writer, category, title, content, public, tags } = req.body;
 
+    // trim은 프론트에서 해서 와야겠다.
     tags = tags && tags.split(',');
     writer = await User.findOne({ id: writer }).select({ _id: 1 });
     category = await Category.findOne({ id: category }).select({
