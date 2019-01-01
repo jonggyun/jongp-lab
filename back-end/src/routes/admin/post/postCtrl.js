@@ -3,10 +3,18 @@ const Post = require('schemas/post');
 const User = require('schemas/user');
 const Category = require('schemas/category');
 
+const { checkAuth } = require('middlewares/auth');
+
 // 포스팅 전체 리스트 조회
 // 최신순으로 해보기
 exports.list = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     // 일단 정렬은 id 역순으로 해두기.
     const list = await Post.find()
       .sort({ id: -1 })
@@ -26,6 +34,12 @@ exports.list = async (req, res) => {
 // 포스팅 작성하기
 exports.write = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     // populate를 하려면 objectid로 넣어야 하는듯
     // writer랑 category의 obejctid를 구한 뒤 insert
     let { writer, category, title, content, public, tags } = req.body;
@@ -62,6 +76,12 @@ exports.write = async (req, res) => {
 //포스팅 상세페이지
 exports.detail = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     const { postId } = req.params;
     const detail = await Post.findOne({ _id: postId }).populate(
       'writer',
@@ -78,6 +98,12 @@ exports.detail = async (req, res) => {
 // 포스팅 내용 수정
 exports.modify = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     const { postId } = req.params;
     const { title, content, public, tags } = req.body;
 
@@ -95,6 +121,12 @@ exports.modify = async (req, res) => {
 // 포스팅 삭제
 exports.remove = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     const { postId } = req.params;
     await Post.remove({ _id: postId });
     res.sendStatus(status.OK);

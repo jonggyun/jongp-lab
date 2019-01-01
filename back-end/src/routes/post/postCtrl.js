@@ -117,7 +117,8 @@ exports.removeComment = async (req, res) => {
         res.sendStatus(status.INTERNAL_SERVER_ERROR);
       }
       if (!hash) {
-        res.sendStatus(status.UNAUTHORIZED);
+        // 여기는 딱히 로그인이 아니기 떄문에 비밀번호가 맞지 않으면 수정되지 않음으로 return
+        res.sendStatus(status.NOT_MODIFIED);
         return;
       }
       Comment.remove({ _id: commentId }).exec();

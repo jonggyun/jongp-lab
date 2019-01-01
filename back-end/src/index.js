@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const connect = require('./schemas'); // 스키마 연결

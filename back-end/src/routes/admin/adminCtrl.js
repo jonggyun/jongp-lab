@@ -1,6 +1,9 @@
 const User = require('schemas/user');
 const bcrpyt = require('bcrypt');
 const status = require('http-status');
+const jwt = require('jsonwebtoken');
+
+const { checkAuth } = require('middlewares/auth');
 
 exports.login = async (req, res, next) => {
   try {
@@ -12,9 +15,23 @@ exports.login = async (req, res, next) => {
         console.log('bcrypt. compare() error', err.message);
         res.sendStatus(status.INTERNAL_SERVER_ERROR);
       }
-      hash === true
-        ? res.json({ isLoggedIn: true })
-        : res.sendStatus(status.UNAUTHORIZED);
+      if (!hash) {
+        res.sendStatus(status.UNAUTHORIZED);
+        return;
+      }
+      //jwt token 발급하기
+      const token = jwt.sign(
+        {
+          id: body.id,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '1d',
+          issuer: 'jongplab',
+        }
+      );
+
+      res.json({ isLoggedIn: true, token });
     });
   } catch (err) {
     console.log(err);
@@ -27,6 +44,12 @@ exports.logout = () => {};
 // about 조회
 exports.getAbout = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     const { about } = await User.findOne({ auth: 'admin' });
     res.json(about);
   } catch (err) {
@@ -38,6 +61,12 @@ exports.getAbout = async (req, res) => {
 // about 수정
 exports.modifyAbout = async (req, res) => {
   try {
+    // 로그인 검증 하기
+    const { success } = await checkAuth(req);
+    if (!success) {
+      res.sendStatus(status.UNAUTHORIZED);
+      return;
+    }
     const { about, id } = req.body;
     const { _id } = await User.findOne({ id, auth: 'admin' });
     await User.update({ _id, auth: 'admin' }, { about: about });
