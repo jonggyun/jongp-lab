@@ -56,6 +56,8 @@ exports.modifyCategory = async (req, res) => {
     res.sendStatus(status.NO_CONTENT);
   }
 };
+
+// 카테고리 삭제
 exports.removeCategory = async (req, res) => {
   try {
     await Category.remove({ _id: req.body._id });

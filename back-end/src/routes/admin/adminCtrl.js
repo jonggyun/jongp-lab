@@ -23,9 +23,28 @@ exports.login = async (req, res, next) => {
 };
 
 exports.logout = () => {};
-exports.getAbout = (req, res) => {
-  console.log('get about page');
+
+// about 조회
+exports.getAbout = async (req, res) => {
+  try {
+    const { about } = await User.findOne({ auth: 'admin' });
+    res.json(about);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
 };
-exports.modifyAbout = (req, res) => {
-  console.log('modify about page');
+
+// about 수정
+exports.modifyAbout = async (req, res) => {
+  try {
+    const { about, id } = req.body;
+    const { _id } = await User.findOne({ id, auth: 'admin' });
+    await User.update({ _id, auth: 'admin' }, { about: about });
+
+    res.sendStatus(status.OK);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
 };
