@@ -1,0 +1,48 @@
+// body {
+//   background-color: $default-black;
+// }
+
+*:focus {
+  outline: none;
+}
+
+.wrap {
+  background-color: $default-black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .loginBox {
+    border-radius: 10px;
+    width: 360px;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .username {
+      @include loginBox('input');
+      background-color: $default-white;
+      margin-top: 40px;
+    }
+    .password {
+      @include loginBox('input');
+      background-color: $default-white;
+    }
+    .loginBtn {
+      @include loginBox('div');
+      background-color: $default-black;
+      cursor: pointer;
+      color: $default-white;
+      font-size: 20px;
+    }
+    .footer {
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: 50px;
+      color: #767676;
+      font-size: 12px;
+    }
+  }
+}

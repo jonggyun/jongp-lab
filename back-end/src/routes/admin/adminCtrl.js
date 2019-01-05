@@ -10,6 +10,13 @@ exports.login = async (req, res, next) => {
     const body = req.body;
     const user = await User.findOne({ id: body.id });
 
+    console.log('find User!!!!!!!!', user);
+
+    if (user === null) {
+      res.json({ isLoggedIn: false });
+      return;
+    }
+
     bcrpyt.compare(body.password, user.password, (err, hash) => {
       if (err) {
         console.log('bcrypt. compare() error', err.message);

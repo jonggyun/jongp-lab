@@ -1,0 +1,12 @@
+@mixin loginBox($type) {
+  width: 270px;
+  height: 50px;
+  margin-top: 30px;
+  border: 0;
+  @if $type == input {
+    &::placeholder {
+      padding-left: 15px;
+      font-size: 15px;
+    }
+  }
+}
