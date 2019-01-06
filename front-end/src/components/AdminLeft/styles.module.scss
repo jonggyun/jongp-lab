@@ -1,0 +1,26 @@
+.leftMenu {
+  width: 300px;
+  height: 100vh;
+  background-color: $default-black;
+  .title {
+    height: 160px;
+    color: $default-white;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5em;
+    font-weight: 600;
+  }
+
+  .menuNav {
+    margin-top: 2rem;
+    .menuList {
+      color: $default-white;
+      line-height: 2em;
+      margin-left: 4rem;
+      font-size: 25px;
+    }
+  }
+}

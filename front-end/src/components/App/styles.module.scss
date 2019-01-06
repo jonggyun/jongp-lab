@@ -6,3 +6,9 @@ body {
   font-family: 'Nanum Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif;
 }
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: $default-white;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
 
-const Admin = props => <LoginBox {...props} />;
+const AdminLogin = props => <LoginBox {...props} />;
 
 const LoginBox = props => (
   <section className={styles.wrap}>
@@ -32,7 +32,7 @@ const LoginBox = props => (
   </section>
 );
 
-Admin.propTypes = {
+AdminLogin.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleKeyPress: PropTypes.func.isRequired,
@@ -40,4 +40,4 @@ Admin.propTypes = {
   passwordValue: PropTypes.string.isRequired,
 };
 
-export default Admin;
+export default AdminLogin;

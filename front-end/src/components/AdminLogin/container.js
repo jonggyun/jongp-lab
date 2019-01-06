@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import Admin from './presenter';
+import PropTypes from 'prop-types';
+import AdminLogin from './presenter';
 
 class Container extends Component {
   state = {
     username: '',
     password: '',
   };
+  static propType = {
+    usernameLogin: PropTypes.func.isRequired,
+  };
   render() {
     const { username, password } = this.state;
     return (
-      <Admin
+      <AdminLogin
         handleInputChange={this._handleInputChange}
         handleSubmit={this._handleSubmit}
         handleKeyPress={this._handleKeyPress}

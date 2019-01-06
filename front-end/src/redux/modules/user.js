@@ -2,12 +2,19 @@
 
 // actions
 const SAVE_TOKEN = 'SAVE_TOKEN';
+const LOG_OUT = 'LOG_OUT';
 
 // action creators
 const saveToken = token => {
   return {
     type: SAVE_TOKEN,
     token,
+  };
+};
+
+const logout = () => {
+  return {
+    type: LOG_OUT,
   };
 };
 
@@ -48,6 +55,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_TOKEN:
       return applySetToken(state, action);
+    case LOG_OUT:
+      return applyLogout(state, action);
     default:
       return state;
   }
@@ -66,10 +75,18 @@ const applySetToken = (state, action) => {
   };
 };
 
+const applyLogout = (state, action) => {
+  localStorage.removeItem('jwt');
+  return {
+    isLoggedIn: false,
+  };
+};
+
 // exports
 
 const actionCreators = {
   usernameLogin,
+  logout,
 };
 
 export { actionCreators };

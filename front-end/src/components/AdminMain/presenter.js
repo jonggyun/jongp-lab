@@ -1,13 +1,13 @@
 import React from 'react';
-import AdminLeft from 'components/AdminLeft';
 import styles from './styles.module.scss';
+import AdminLeft from 'components/AdminLeft';
 
-const AdminAbout = props => (
+const AdminMain = props => (
   <div className={styles.wrap}>
-    <AdminLeft />
+    <AdminLeft {...props} />
     <div className={styles.rightContent} />
-    AdminAbout!!!!!
+    MainPage
   </div>
 );
 
-export default AdminAbout;
+export default AdminMain;
