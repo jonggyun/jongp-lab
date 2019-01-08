@@ -3,6 +3,7 @@
 // actions
 const SAVE_TOKEN = 'SAVE_TOKEN';
 const LOG_OUT = 'LOG_OUT';
+const GET_ABOUT = 'GET_ABOUT';
 
 // action creators
 const saveToken = token => {
@@ -15,6 +16,13 @@ const saveToken = token => {
 const logout = () => {
   return {
     type: LOG_OUT,
+  };
+};
+
+const getAbout = about => {
+  return {
+    type: GET_ABOUT,
+    about,
   };
 };
 
@@ -44,10 +52,35 @@ const usernameLogin = (id, password) => {
   };
 };
 
+const getAdminAbout = () => {
+  return (dispatch, getState) => {
+    const {
+      user: { token },
+    } = getState();
+    fetch('/admin/about', {
+      method: 'GET',
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logout());
+          return;
+        }
+        return response.json();
+      })
+      .then(json => {
+        dispatch(getAbout(json));
+      });
+  };
+};
+
 // initial state
 const initialState = {
   isLoggedIn: localStorage.getItem('jwt') ? true : false,
   token: localStorage.getItem('jwt'),
+  about: '',
 };
 
 // reducer
@@ -57,6 +90,8 @@ const reducer = (state = initialState, action) => {
       return applySetToken(state, action);
     case LOG_OUT:
       return applyLogout(state, action);
+    case GET_ABOUT:
+      return applyGetAbout(state, action);
     default:
       return state;
   }
@@ -82,11 +117,20 @@ const applyLogout = (state, action) => {
   };
 };
 
+const applyGetAbout = (state, action) => {
+  const { about } = action;
+  return {
+    ...state,
+    about,
+  };
+};
+
 // exports
 
 const actionCreators = {
   usernameLogin,
   logout,
+  getAdminAbout,
 };
 
 export { actionCreators };

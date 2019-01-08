@@ -1,0 +1,29 @@
+.wrap {
+  @include adminHeaderWrap();
+  .rightContent {
+    .template {
+      width: 800px;
+      height: 500px;
+      background: white;
+      margin-left: 3rem;
+      padding-top: 1.5rem;
+      .list {
+        //width: 740px;
+        width: 46rem;
+        height: 3rem;
+        background: $default-gray;
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        .icon {
+          min-width: 12%;
+        }
+        .content {
+          text-align: center;
+          min-width: 25%;
+        }
+      }
+    }
+  }
+}

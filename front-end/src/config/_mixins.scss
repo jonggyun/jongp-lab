@@ -10,3 +10,9 @@
     }
   }
 }
+
+@mixin adminHeaderWrap {
+  display: flex;
+  background-color: $default-white;
+  //height: 100vh;
+}

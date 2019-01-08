@@ -1,8 +1,8 @@
 import React from 'react';
-import AdminLeft from './presenter';
+import LeftMenu from './presenter';
 
 const Container = props => {
-  return <AdminLeft {...props} />;
+  return <LeftMenu {...props} />;
 };
 
 export default Container;

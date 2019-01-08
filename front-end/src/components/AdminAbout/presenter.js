@@ -1,13 +1,27 @@
 import React from 'react';
-import AdminLeft from 'components/AdminLeft';
+import PropTypes from 'prop-types';
+import LeftMenu from 'components/common/admin/LeftMenu';
+import Header from 'components/common/admin/Header';
 import styles from './styles.module.scss';
 
 const AdminAbout = props => (
   <div className={styles.wrap}>
-    <AdminLeft />
-    <div className={styles.rightContent} />
-    AdminAbout!!!!!
+    <LeftMenu />
+    <div className={styles.rightContent}>
+      <Header type="about" />
+      {props.about && <AboutTemplate {...props} />}
+    </div>
   </div>
 );
+
+AdminAbout.propType = {
+  about: PropTypes.string.isRequired,
+};
+
+const AboutTemplate = props => {
+  const { about } = props;
+
+  return <section className={styles.template}>{about}</section>;
+};
 
 export default AdminAbout;

@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import AdminLogin from 'components/AdminLogin';
 import AdminMain from 'components/AdminMain';
 import AdminAbout from 'components/AdminAbout';
+import AdminCategory from 'components/AdminCategory';
 
 const App = props => {
-  console.log('App component', props);
   return [
     props.isLoggedIn ? <PrivateRoutes key={1} /> : <PublicRoutes key={1} />,
   ];
@@ -23,7 +23,7 @@ const PrivateRoutes = props => {
     <React.Fragment>
       <Route exact path="/admin" component={AdminMain} />
       <Route path="/admin/about" component={AdminAbout} />
-      <Route path="/admin/category" render={() => 'categoryPage'} />
+      <Route path="/admin/category" component={AdminCategory} />
       <Route path="/admin/post" render={() => 'postPage'} />
     </React.Fragment>
   );

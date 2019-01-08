@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import AdminLeft from 'components/AdminLeft';
+import LeftMenu from 'components/common/admin/LeftMenu';
 
 const AdminMain = props => (
   <div className={styles.wrap}>
-    <AdminLeft {...props} />
+    <LeftMenu {...props} />
     <div className={styles.rightContent} />
     MainPage
   </div>
