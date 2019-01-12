@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LeftMenu from 'components/common/admin/LeftMenu';
-import Header from 'components/common/admin/Header';
+import AdminLeftMenu from 'components/common/AdminLeftMenu';
+import AdminHeader from 'components/common/AdminHeader';
 import styles from './styles.module.scss';
 import Ionicons from 'react-ionicons';
 
 const AdminCategory = props => (
   <div className={styles.wrap}>
-    <LeftMenu />
+    <AdminLeftMenu />
     <div className={styles.rightContent}>
-      <Header type="category" />
+      <AdminHeader type="category" />
       <div className={styles.template}>
-        <ul>{props.categoryList && <CategoryList {...props} />}</ul>
+        <ul>{props.categories && <Categories {...props} />}</ul>
       </div>
     </div>
   </div>
@@ -21,8 +21,8 @@ AdminCategory.propType = {
   getCategory: PropTypes.func.isRequired,
 };
 
-const CategoryList = props =>
-  props.categoryList.map(category => (
+const Categories = props =>
+  props.categories.map(category => (
     <li className={styles.list} key={category._id}>
       <Ionicons
         className={styles.icon}

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LeftMenu from 'components/common/admin/LeftMenu';
-import Header from 'components/common/admin/Header';
+import AdminLeftMenu from 'components/common/AdminLeftMenu';
+import AdminHeader from 'components/common/AdminHeader';
 import styles from './styles.module.scss';
 
 const AdminAbout = props => (
   <div className={styles.wrap}>
-    <LeftMenu />
+    <AdminLeftMenu />
     <div className={styles.rightContent}>
-      <Header type="about" />
+      <AdminHeader type="about" />
       {props.about && <AboutTemplate {...props} />}
     </div>
   </div>

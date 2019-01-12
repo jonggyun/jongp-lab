@@ -6,10 +6,10 @@ import { actionCreators as categoryActions } from 'redux/modules/category';
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    category: { list },
+    category: { categories },
   } = state;
   return {
-    categoryList: list,
+    categories,
   };
 };
 

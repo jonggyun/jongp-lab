@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 
-const LeftMenu = props => (
+const AdminLeftMenu = props => (
   <section className={styles.leftMenu}>
     <div className={styles.title}>
       <Link to="/admin">
@@ -26,4 +26,4 @@ const LeftMenu = props => (
   </section>
 );
 
-export default LeftMenu;
+export default AdminLeftMenu;

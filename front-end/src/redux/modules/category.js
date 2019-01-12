@@ -4,10 +4,10 @@ import { actionCreators as userActions } from 'redux/modules/user';
 const SET_CATEGORY = 'SET_CATEGORY';
 
 // action creators
-const setCategory = list => {
+const setCategory = categories => {
   return {
     type: SET_CATEGORY,
-    list,
+    categories,
   };
 };
 
@@ -51,10 +51,10 @@ const reducer = (state = initialState, action) => {
 
 // reducer function
 const applySetCategory = (state, action) => {
-  const { list } = action;
+  const { categories } = action;
   return {
     ...state,
-    list,
+    categories,
   };
 };
 // exports

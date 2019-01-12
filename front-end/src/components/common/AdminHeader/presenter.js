@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import Ionicons from 'react-ionicons';
 
-const Header = props => (
+const AdminHeader = props => (
   <section className={styles.adminHeader}>
     <span className={styles.headerText}>
       {props.type === 'about' && 'About'}
@@ -24,4 +24,4 @@ const Header = props => (
   </section>
 );
 
-export default Header;
+export default AdminHeader;

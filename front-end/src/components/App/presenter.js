@@ -7,6 +7,7 @@ import AdminLogin from 'components/AdminLogin';
 import AdminMain from 'components/AdminMain';
 import AdminAbout from 'components/AdminAbout';
 import AdminCategory from 'components/AdminCategory';
+import AdminPost from 'components/AdminPost';
 
 const App = props => {
   return [
@@ -24,7 +25,7 @@ const PrivateRoutes = props => {
       <Route exact path="/admin" component={AdminMain} />
       <Route path="/admin/about" component={AdminAbout} />
       <Route path="/admin/category" component={AdminCategory} />
-      <Route path="/admin/post" render={() => 'postPage'} />
+      <Route path="/admin/post" component={AdminPost} />
     </React.Fragment>
   );
 };
