@@ -10,3 +10,15 @@
     }
   }
 }
+
+@mixin postInfoBox {
+  width: 100px;
+  height: 25px;
+  text-align: center;
+  margin-bottom: 5px;
+  border-radius: 15px;
+  border: 1px solid $default-border;
+  &::placeholder {
+    font-size: 15px;
+  }
+}

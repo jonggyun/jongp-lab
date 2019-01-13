@@ -1,0 +1,62 @@
+.inputComment {
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .count {
+    font-size: 15px;
+  }
+  .inputs {
+    display: flex;
+    margin-top: 10px;
+
+    .inputBox {
+      display: flex;
+      flex-direction: column;
+      width: 120px;
+      align-items: center;
+      .box {
+        @include postInfoBox;
+      }
+    }
+    .textarea {
+      width: 580px;
+      height: 57px;
+      resize: none;
+      border-radius: 10px;
+    }
+    .buttonLocation {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
+.emptySpace {
+  height: 70px;
+  border-bottom: 1px solid black;
+}
+.comments {
+  height: 90px;
+  display: flex;
+  margin-top: 20px;
+  border-bottom: 1px solid black;
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .writer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include postInfoBox;
+    }
+  }
+  .content {
+    margin-left: 20px;
+    padding-right: 10px;
+    width: 585px;
+    height: 57px;
+  }
+}
