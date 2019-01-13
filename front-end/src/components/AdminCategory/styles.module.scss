@@ -1,5 +1,5 @@
 .wrap {
-  @include adminHeaderWrap();
+  margin-left: $left-size;
   .rightContent {
     .template {
       width: 800px;

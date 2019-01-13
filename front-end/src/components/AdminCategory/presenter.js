@@ -8,16 +8,17 @@ import Ionicons from 'react-ionicons';
 const AdminCategory = props => (
   <div className={styles.wrap}>
     <AdminLeftMenu />
-    <div className={styles.rightContent}>
+    <section className={styles.rightContent}>
       <AdminHeader type="category" />
       <div className={styles.template}>
         <ul>{props.categories && <Categories {...props} />}</ul>
       </div>
-    </div>
+    </section>
   </div>
 );
 
 AdminCategory.propType = {
+  categories: PropTypes.arrayOf,
   getCategory: PropTypes.func.isRequired,
 };
 

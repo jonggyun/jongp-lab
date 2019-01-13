@@ -7,10 +7,10 @@ import styles from './styles.module.scss';
 const AdminAbout = props => (
   <div className={styles.wrap}>
     <AdminLeftMenu />
-    <div className={styles.rightContent}>
+    <section className={styles.rightContent}>
       <AdminHeader type="about" />
       {props.about && <AboutTemplate {...props} />}
-    </div>
+    </section>
   </div>
 );
 

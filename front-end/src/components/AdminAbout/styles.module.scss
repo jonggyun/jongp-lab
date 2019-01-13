@@ -1,13 +1,12 @@
 .wrap {
-  @include adminHeaderWrap();
+  margin-left: $left-size;
   .rightContent {
     .template {
       width: 785px;
-      //height: 100%;
-      min-height: 80%;
       background-color: white;
       margin-left: 4rem;
       border-radius: 1rem;
+      height: 80vh;
     }
   }
 }

@@ -5,6 +5,7 @@ import createHistory from 'history/createBrowserHistory'; // 찾아보기
 import { composeWithDevTools } from 'redux-devtools-extension';
 import user from 'redux/modules/user';
 import category from 'redux/modules/category';
+import posts from 'redux/modules/posts';
 
 // node의 process를 이용하면 현재 개발인지 운영인지 확인할 수 있다.
 const env = process.env.NODE_ENV;
@@ -24,6 +25,7 @@ const reducer = () =>
   combineReducers({
     user,
     category,
+    posts,
     router: connectRouter(history),
   });
 

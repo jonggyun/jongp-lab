@@ -15,16 +15,31 @@ exports.list = async (req, res) => {
       res.sendStatus(status.UNAUTHORIZED);
       return;
     }
+    console.log('success', success);
     // 일단 정렬은 id 역순으로 해두기.
     const list = await Post.find()
       .sort({ id: -1 })
       .populate('writer')
-      .populate('category');
+      .populate('category')
+      .lean()
+      .exec();
     if (list.length === 0) {
       res.sendStatus(status.NO_CONTENT);
       return;
     }
-    res.json(list);
+
+    const posts = list.map(post => ({
+      ...post,
+      title:
+        post.title.length < 13 ? post.title : `${post.title.slice(0, 13)}...`,
+      subtitle:
+        post.subtitle &&
+        (post.subtitle.length < 50
+          ? post.subtitle
+          : `${post.subtitle.slice(0, 50)}...`),
+    }));
+
+    res.json(posts);
   } catch (err) {
     console.log(err);
     res.sendStatus(status.BAD_REQUEST);

@@ -43,11 +43,11 @@ const Post = new Schema({
     type: Date,
     default: Date.now,
   },
-  thumnail: {
+  thumbnail: {
     type: String,
     required: false,
   },
-  thumnailPath: {
+  thumbnailPath: {
     type: String,
     required: false,
   },
@@ -59,11 +59,6 @@ const Post = new Schema({
     type: Boolean,
     required: true,
   },
-  // comment: {
-  //   type: [ObjectId],
-  //   required: false,
-  //   ref: 'Comment',
-  // },
 });
 
 module.exports = mongoose.model('Post', Post);

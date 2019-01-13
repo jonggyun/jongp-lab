@@ -5,7 +5,7 @@ import AdminLeftMenu from 'components/common/AdminLeftMenu';
 const AdminMain = props => (
   <div className={styles.wrap}>
     <AdminLeftMenu {...props} />
-    <div className={styles.rightContent} />
+    <section className={styles.rightContent} />
     MainPage
   </div>
 );
