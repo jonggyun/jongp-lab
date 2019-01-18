@@ -2,24 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AdminLeftMenu from 'components/common/AdminLeftMenu';
 import AdminHeader from 'components/common/AdminHeader';
+import Modal from 'components/common/Modal';
 import styles from './styles.module.scss';
 import Ionicons from 'react-ionicons';
 
 const AdminCategory = props => (
-  <div className={styles.wrap}>
-    <AdminLeftMenu />
-    <section className={styles.rightContent}>
-      <AdminHeader type="category" />
-      <div className={styles.template}>
-        <ul>{props.categories && <Categories {...props} />}</ul>
+  <React.Fragment>
+    {props.clickModal && (
+      <div>
+        <Modal handleClickModal={props.handleClickModal} />
       </div>
-    </section>
-  </div>
+    )}
+    <div className={styles.wrap}>
+      <AdminLeftMenu />
+      <section className={styles.rightContent}>
+        <AdminHeader
+          type="category"
+          handleClickModal={props.handleClickModal}
+        />
+        <div className={styles.template}>
+          <ul>{props.categories && <Categories {...props} />}</ul>
+        </div>
+      </section>
+    </div>
+  </React.Fragment>
 );
 
 AdminCategory.propType = {
   categories: PropTypes.arrayOf,
   getCategory: PropTypes.func.isRequired,
+  clickModal: PropTypes.bool.isRequired,
+  handleClickModal: PropTypes.func.isRequired,
 };
 
 const Categories = props =>

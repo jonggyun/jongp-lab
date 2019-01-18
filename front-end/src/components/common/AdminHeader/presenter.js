@@ -13,7 +13,12 @@ const AdminHeader = props => (
       <Ionicons icon="md-create" fontSize="30px" color="black" />
     )}
     {props.type === 'category' && (
-      <Ionicons icon="md-add-circle" fontSize="30px" color="black" />
+      <Ionicons
+        icon="md-add-circle"
+        fontSize="30px"
+        color="black"
+        onClick={props.handleClickModal}
+      />
     )}
     {props.type === 'post' && (
       <div>

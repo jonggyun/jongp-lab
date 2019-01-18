@@ -1,0 +1,54 @@
+.modalWrap {
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(100, 100, 100, 0.5);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal {
+    width: 330px;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
+    .header {
+      height: 20%;
+      background-color: $default-gray;
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: inherit;
+    }
+    .input {
+      display: flex;
+      flex-direction: column;
+      height: 65%;
+      width: 70%;
+      margin-left: 10px;
+      input {
+        height: 35px;
+        margin-top: 15px;
+        border: 0;
+        border-bottom: 1px solid;
+        font-size: 20px;
+        &::placeholder {
+          color: gray;
+        }
+      }
+
+      .public {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 15px;
+      }
+    }
+    .buttons {
+      display: flex;
+      flex-direction: row-reverse;
+      height: 15%;
+    }
+  }
+}

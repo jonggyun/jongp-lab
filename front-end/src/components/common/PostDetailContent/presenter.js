@@ -4,6 +4,7 @@ import Tag from 'components/common/Tag';
 import dateFormat from 'dateformat';
 import defaultThunmbnail from 'images/default.png';
 import defaultProfile from 'images/default-profile-picture.jpg';
+import PropType from 'prop-types';
 
 const PostDetailContent = ({ post }) => (
   <div>
@@ -32,11 +33,21 @@ const PostDetailContent = ({ post }) => (
     />
     <div className={styles.content}>{post.content}</div>
     <div className={styles.tags}>
-      <Tag tag="태그입니다" />
-      <Tag tag="태그2" />
-      <Tag tag="자바스크립트" />
+      <Tags tags={post.tags} />
     </div>
   </div>
 );
+
+PostDetailContent.propType = {
+  imagePath: PropType.string,
+  createdAt: PropType.string.isRequired,
+  title: PropType.string.isRequired,
+  subtitle: PropType.string,
+  thumbnail: PropType.string,
+  content: PropType.string,
+};
+
+const Tags = ({ tags }, index) =>
+  tags.map(tag => <Tag key={index} tag={tag} />);
 
 export default PostDetailContent;
