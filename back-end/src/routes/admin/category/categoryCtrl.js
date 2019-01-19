@@ -50,6 +50,7 @@ exports.createCategory = async (req, res) => {
       order: Number(lastCategory.order) + 1,
       public: req.body.public,
     });
+    console.log(newCategory);
     newCategory.save();
 
     res.sendStatus(status.OK);

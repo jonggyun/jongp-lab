@@ -5,34 +5,30 @@ import AdminCategory from './presenter';
 class Container extends Component {
   static propType = {
     getCategory: PropTypes.func.isRequired,
-  };
-  state = {
-    clickModal: false,
+    setClickModal: PropTypes.func.isRequired,
+    clickModal: PropTypes.bool.isRequired,
   };
   componentDidMount() {
     const { getCategory } = this.props;
     getCategory();
   }
+
   render() {
     return (
       <AdminCategory
         {...this.props}
-        clickModal={this.state.clickModal}
+        clickModal={this.props.clickModal}
         handleClickModal={this._handleClickModal}
       />
     );
   }
 
   _handleClickModal = () => {
-    const { clickModal } = this.state;
+    const { clickModal, setClickModal } = this.props;
     if (clickModal) {
-      this.setState({
-        clickModal: false,
-      });
+      setClickModal(false);
     } else {
-      this.setState({
-        clickModal: true,
-      });
+      setClickModal(true);
     }
   };
 }
