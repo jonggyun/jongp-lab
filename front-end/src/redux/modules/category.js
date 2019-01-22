@@ -3,6 +3,7 @@ import { actionCreators as userActions } from 'redux/modules/user';
 // actions
 const SET_CATEGORY = 'SET_CATEGORY';
 const SET_CLICK_MODAL = 'SET_CLICK_MODAL';
+const SELECTED_CATEGORY = 'SELECTED_CATEGORY';
 
 // action creators
 const setCategory = categories => {
@@ -16,6 +17,13 @@ const setClickModal = clickModal => {
   return {
     type: SET_CLICK_MODAL,
     clickModal,
+  };
+};
+
+const selectedCategory = id => {
+  return {
+    type: SELECTED_CATEGORY,
+    id,
   };
 };
 
@@ -72,6 +80,30 @@ const createCategory = (id, name, isPublic) => {
   };
 };
 
+const deleteCategory = id => {
+  console.log('deleteCategory', id);
+  return (dispatch, getState) => {
+    const {
+      user: { token },
+    } = getState();
+    fetch('/admin/category', {
+      method: 'DELETE',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    }).then(response => {
+      if (response.status === 200) {
+        dispatch(setClickModal(false));
+        dispatch(getCategory());
+      }
+    });
+  };
+};
+
 // initial state
 const initialState = {
   clickModal: false,
@@ -84,6 +116,8 @@ const reducer = (state = initialState, action) => {
       return applySetCategory(state, action);
     case SET_CLICK_MODAL:
       return applySetClickModal(state, action);
+    case SELECTED_CATEGORY:
+      return applySelectedCategory(state, action);
     default:
       return state;
   }
@@ -106,12 +140,22 @@ const applySetClickModal = (state, action) => {
   };
 };
 
+const applySelectedCategory = (state, action) => {
+  const { id } = action;
+  return {
+    ...state,
+    id,
+  };
+};
+
 // exports
 
 const actionCreators = {
   getCategory,
   createCategory,
   setClickModal,
+  selectedCategory,
+  deleteCategory,
 };
 
 export { actionCreators };

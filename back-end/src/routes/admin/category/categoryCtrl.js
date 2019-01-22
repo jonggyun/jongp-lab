@@ -87,7 +87,7 @@ exports.removeCategory = async (req, res) => {
       res.sendStatus(status.UNAUTHORIZED);
       return;
     }
-    await Category.remove({ _id: req.body._id });
+    await Category.remove({ _id: req.body.id });
     res.sendStatus(status.OK);
   } catch (err) {
     console.log(err);

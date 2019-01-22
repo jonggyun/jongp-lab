@@ -6,11 +6,12 @@ import { actionCreators as categoryActions } from 'redux/modules/category';
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    category: { categories, clickModal },
+    category: { categories, clickModal, id },
   } = state;
   return {
     categories,
     clickModal,
+    id,
   };
 };
 
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     getCategory: () => dispatch(categoryActions.getCategory()),
     createCategory: (id, name) =>
       dispatch(categoryActions.createCategory(id, name)),
+    selectedCategory: id => dispatch(categoryActions.selectedCategory(id)),
   };
 };
 

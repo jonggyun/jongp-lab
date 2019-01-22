@@ -8,9 +8,22 @@ import Ionicons from 'react-ionicons';
 
 const AdminCategory = props => (
   <React.Fragment>
-    {props.clickModal && (
+    {props.clickModal && props.modalType === 'addcategory' && (
       <div>
-        <Modal handleClickModal={props.handleClickModal} />
+        <Modal
+          handleClickModal={props.handleClickModal}
+          name="카테고리 등록/수정"
+          type="addcategory"
+        />
+      </div>
+    )}
+    {props.clickModal && props.modalType === 'delcategory' && (
+      <div>
+        <Modal
+          handleClickModal={props.handleClickModal}
+          name="카테고리 삭제"
+          type="delcategory"
+        />
       </div>
     )}
     <div className={styles.wrap}>
@@ -33,11 +46,12 @@ AdminCategory.propType = {
   getCategory: PropTypes.func.isRequired,
   clickModal: PropTypes.bool.isRequired,
   handleClickModal: PropTypes.func.isRequired,
+  handleClickDelete: PropTypes.func.isRequired,
 };
 
 const Categories = props =>
   props.categories.map(category => (
-    <li className={styles.list} key={category._id}>
+    <li className={styles.list} key={category._id} id={category._id}>
       <Ionicons
         className={styles.icon}
         icon="md-square-outline"
@@ -63,6 +77,7 @@ const Categories = props =>
         icon="md-close-circle"
         fontSize="30px"
         color="black"
+        onClick={props.handleClickDelete}
       />
     </li>
   ));

@@ -1,17 +1,17 @@
-import { connect } from 'react-redux';
-import Container from './container';
-import { withRouter } from 'react-router-dom';
-import { actionCreators as categoryActions } from 'redux/modules/category';
+import React from 'react';
+import AddCategory from 'components/modal/AddCategory';
+import DelCategory from 'components/modal/DelCategory';
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    createCategory: (id, name, isPublic) => {
-      dispatch(categoryActions.createCategory(id, name, isPublic));
-    },
-  };
-};
+import styles from './styles.module.scss';
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(Container));
+const Modal = props => (
+  <div className={styles.modalWrap}>
+    <div className={styles.modal}>
+      <div className={styles.header}>{props.name}</div>
+      {props.type === 'addcategory' && <AddCategory {...props} />}
+      {props.type === 'delcategory' && <DelCategory {...props} />}
+    </div>
+  </div>
+);
+
+export default Modal;

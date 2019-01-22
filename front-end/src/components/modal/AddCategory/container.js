@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Modal from './presenter';
+import AddCategory from './presenter';
 
 class Container extends Component {
   state = {
@@ -16,7 +16,7 @@ class Container extends Component {
     const { handleClickModal } = this.props;
     const { id, name, isPublic } = this.state;
     return (
-      <Modal
+      <AddCategory
         handleClickModal={handleClickModal}
         handleInputChange={this._handleInputChange}
         handleSubmit={this._handleSubmit}
