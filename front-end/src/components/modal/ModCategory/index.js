@@ -8,15 +8,16 @@ const mapStateToProps = (state, ownProps) => {
     category: { id },
   } = state;
   return {
-    id,
+    ...state,
+    _id: id,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    createCategory: (id, name, isPublic) => {
-      dispatch(categoryActions.createCategory(id, name, isPublic));
-    },
+    getCategoryDetail: id => dispatch(categoryActions.getCategoryDetail(id)),
+    modifyCategory: (_id, id, name, isPublic) =>
+      dispatch(categoryActions.modifyCategory(_id, id, name, isPublic)),
   };
 };
 

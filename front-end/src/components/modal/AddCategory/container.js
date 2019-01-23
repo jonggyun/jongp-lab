@@ -12,6 +12,7 @@ class Container extends Component {
     handleClickModal: PropTypes.func.isRequired,
     createCategory: PropTypes.func.isRequired,
   };
+
   render() {
     const { handleClickModal } = this.props;
     const { id, name, isPublic } = this.state;

@@ -13,6 +13,7 @@ class Container extends Component {
     clickModal: PropTypes.bool.isRequired,
     id: PropTypes.string,
     selectedCategory: PropTypes.func.isRequired,
+    getCategoryDetail: PropTypes.func.isRequired,
   };
   componentDidMount() {
     const { getCategory } = this.props;
@@ -27,6 +28,7 @@ class Container extends Component {
         modalType={this.state.modalType}
         handleClickModal={this._handleClickModal}
         handleClickDelete={this._handleClickDelete}
+        handleClickModify={this._handleClickModify}
       />
     );
   }
@@ -58,6 +60,25 @@ class Container extends Component {
         modalType: 'delcategory',
       });
       selectedCategory(id);
+    }
+  };
+
+  _handleClickModify = event => {
+    const {
+      currentTarget: {
+        parentNode: { id },
+      },
+    } = event;
+    const { clickModal, setClickModal, selectedCategory } = this.props;
+    if (clickModal) {
+      setClickModal(false);
+    } else {
+      setClickModal(true);
+      this.setState({
+        modalType: 'modify',
+      });
+      selectedCategory(id);
+      //getCategoryDetail(id);
     }
   };
 }

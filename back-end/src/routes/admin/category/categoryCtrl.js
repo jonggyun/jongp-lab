@@ -5,7 +5,7 @@ const status = require('http-status');
 const { checkAuth } = require('middlewares/auth');
 
 // 카테고리 리스트 가져오기.
-exports.getCategory = async (req, res) => {
+exports.getCategories = async (req, res) => {
   try {
     // 로그인 검증 하기
     const { success } = await checkAuth(req);
@@ -13,21 +13,34 @@ exports.getCategory = async (req, res) => {
       res.sendStatus(status.UNAUTHORIZED);
       return;
     }
-    const list = await Category.find().sort({ order: 1 });
+    const categories = await Category.find().sort({ order: 1 });
     // 없을 경우 no content
-    console.log(list.length);
-    if (!list || list.length === 0) {
+    console.log(categories.length);
+    if (!categories || categories.length === 0) {
       res.sendStatus(status.NO_CONTENT);
       return;
     }
-    res.send(list);
+    res.send(categories);
+  } catch (err) {
+    console.log('getCategories', err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
+};
+
+// 카테고리 상세
+exports.getCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const category = await Category.findOne({ _id: id }).exec();
+    console.log('category', category);
+    res.send(category);
   } catch (err) {
     console.log('getCategory', err);
     res.sendStatus(status.BAD_REQUEST);
   }
 };
 
-// 마테고리 생성하기
+// 카테고리 생성하기
 /**
  * insert id, name, public
  */

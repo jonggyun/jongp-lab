@@ -4,6 +4,7 @@ import { actionCreators as userActions } from 'redux/modules/user';
 const SET_CATEGORY = 'SET_CATEGORY';
 const SET_CLICK_MODAL = 'SET_CLICK_MODAL';
 const SELECTED_CATEGORY = 'SELECTED_CATEGORY';
+const SET_CATEGORY_DETAIL = 'SET_CATEGORY_DETAIL';
 
 // action creators
 const setCategory = categories => {
@@ -24,6 +25,13 @@ const selectedCategory = id => {
   return {
     type: SELECTED_CATEGORY,
     id,
+  };
+};
+
+const setCategoryDetail = detail => {
+  return {
+    type: SET_CATEGORY_DETAIL,
+    detail,
   };
 };
 
@@ -48,6 +56,16 @@ const getCategory = () => {
       })
       .then(json => {
         dispatch(setCategory(json));
+      });
+  };
+};
+
+const getCategoryDetail = _id => {
+  return (dispatch, getState) => {
+    fetch(`/admin/category/${_id}`)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(setCategoryDetail(json));
       });
   };
 };
@@ -81,7 +99,6 @@ const createCategory = (id, name, isPublic) => {
 };
 
 const deleteCategory = id => {
-  console.log('deleteCategory', id);
   return (dispatch, getState) => {
     const {
       user: { token },
@@ -104,9 +121,38 @@ const deleteCategory = id => {
   };
 };
 
+const modifyCategory = (_id, id, name, isPublic) => {
+  return (dispatch, getState) => {
+    const {
+      user: { token },
+    } = getState();
+    fetch('/admin/category', {
+      method: 'PUT',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        _id,
+        id,
+        name,
+        isPublic,
+      }),
+    }).then(response => {
+      if (response.status === 202) {
+        dispatch(setClickModal(false));
+        dispatch(getCategory());
+      }
+    });
+  };
+};
+
 // initial state
 const initialState = {
   clickModal: false,
+  id: '',
+  name: '',
+  detail: '',
 };
 
 // reducer
@@ -118,6 +164,8 @@ const reducer = (state = initialState, action) => {
       return applySetClickModal(state, action);
     case SELECTED_CATEGORY:
       return applySelectedCategory(state, action);
+    case SET_CATEGORY_DETAIL:
+      return applySetCategoryDetail(state, action);
     default:
       return state;
   }
@@ -148,6 +196,14 @@ const applySelectedCategory = (state, action) => {
   };
 };
 
+const applySetCategoryDetail = (state, action) => {
+  const { detail } = action;
+  return {
+    ...state,
+    detail,
+  };
+};
+
 // exports
 
 const actionCreators = {
@@ -156,6 +212,8 @@ const actionCreators = {
   setClickModal,
   selectedCategory,
   deleteCategory,
+  getCategoryDetail,
+  modifyCategory,
 };
 
 export { actionCreators };

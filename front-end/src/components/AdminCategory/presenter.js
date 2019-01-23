@@ -12,7 +12,7 @@ const AdminCategory = props => (
       <div>
         <Modal
           handleClickModal={props.handleClickModal}
-          name="카테고리 등록/수정"
+          name="카테고리 등록"
           type="addcategory"
         />
       </div>
@@ -23,6 +23,15 @@ const AdminCategory = props => (
           handleClickModal={props.handleClickModal}
           name="카테고리 삭제"
           type="delcategory"
+        />
+      </div>
+    )}
+    {props.clickModal && props.modalType === 'modify' && (
+      <div>
+        <Modal
+          handleClickModal={props.handleClickModal}
+          name="카테고리 수정"
+          type="modcategory"
         />
       </div>
     )}
@@ -47,6 +56,7 @@ AdminCategory.propType = {
   clickModal: PropTypes.bool.isRequired,
   handleClickModal: PropTypes.func.isRequired,
   handleClickDelete: PropTypes.func.isRequired,
+  handleClickModify: PropTypes.func.isRequired,
 };
 
 const Categories = props =>
@@ -71,6 +81,7 @@ const Categories = props =>
         icon="md-create"
         fontSize="30px"
         color="black"
+        onClick={props.handleClickModify}
       />
       <Ionicons
         className={styles.icon}

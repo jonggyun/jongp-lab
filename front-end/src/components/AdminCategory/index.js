@@ -23,6 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     createCategory: (id, name) =>
       dispatch(categoryActions.createCategory(id, name)),
     selectedCategory: id => dispatch(categoryActions.selectedCategory(id)),
+    getCategoryDetail: id => dispatch(categoryActions.getCategoryDetail(id)),
   };
 };
 
