@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import Button from 'components/common/Button';
+import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 
-const PostDetailComment = props => (
+const PostDetailComment = ({ comments }) => (
   <React.Fragment>
     <div>
       <div className={styles.inputComment}>
@@ -26,21 +28,29 @@ const PostDetailComment = props => (
       </div>
     </div>
     <div className={styles.emptySpace} />
-    <Comments />
+    {comments && <Comments comments={comments} />}
   </React.Fragment>
 );
 
-const Comments = props => (
-  <div className={styles.comments}>
-    <div className={styles.info}>
-      <div className={styles.writer}>작성자명</div>
-      <div className={styles.createdAt}>2019-01-01</div>
+PostDetailComment.propType = {
+  PostDetailComment: PropTypes.func.isRequired,
+};
+
+const Comments = ({ comments }) => {
+  return comments.map(comment => (
+    <div className={styles.comments} key={comment._id}>
+      <div className={styles.info}>
+        <div className={styles.writer}>{comment.writer}</div>
+        <div className={styles.createdAt}>
+          {dateFormat(comment.updatedAt, 'isoDate')}
+        </div>
+      </div>
+      <div className={styles.content}>{comment.content}</div>
+      <div className={styles.buttonLocation}>
+        <Button name="삭제" />
+      </div>
     </div>
-    <div className={styles.content}>댓글내용입니다..</div>
-    <div className={styles.buttonLocation}>
-      <Button name="삭제" />
-    </div>
-  </div>
-);
+  ));
+};
 
 export default PostDetailComment;

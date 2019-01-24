@@ -2,6 +2,7 @@ const status = require('http-status');
 const Post = require('schemas/post');
 const User = require('schemas/user');
 const Category = require('schemas/category');
+const Comment = require('schemas/comment');
 
 const { checkAuth } = require('middlewares/auth');
 
@@ -133,6 +134,21 @@ exports.modify = async (req, res) => {
     res.sendStatus(status.BAD_REQUEST);
   }
 };
+
+// 포스팅에 달린 댓글 불러오기
+exports.getComment = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    const comments = await Comment.find({ postId }).sort({ createdAt: 1 });
+    console.log(comments);
+    res.json(comments);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
+};
+
 // 포스팅 삭제
 exports.remove = async (req, res) => {
   try {

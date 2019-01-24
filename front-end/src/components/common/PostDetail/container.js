@@ -20,7 +20,6 @@ class Container extends Component {
 
   render() {
     const { post } = this.props;
-    console.log('ss post', post);
     return <PostDetail post={post} />;
   }
 }

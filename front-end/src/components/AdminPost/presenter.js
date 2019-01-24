@@ -5,14 +5,12 @@ import AdminHeader from 'components/common/AdminHeader';
 import PostThumbnail from 'components/common/PostThumbnail';
 import styles from './styles.module.scss';
 
-const AdminPost = props => (
+const AdminPost = ({ posts }) => (
   <div className={styles.wrap}>
     <AdminLeftMenu />
     <section className={styles.rightContent}>
       <AdminHeader type="post" />
-      <div className={styles.postList}>
-        {props.posts && <Posts posts={props.posts} />}
-      </div>
+      <div className={styles.postList}>{posts && <Posts posts={posts} />}</div>
     </section>
   </div>
 );
@@ -22,8 +20,8 @@ AdminPost.propType = {
   getPosts: PropTypes.func.isRequired,
 };
 
-const Posts = posts =>
-  posts.posts.map(post => {
+const Posts = ({ posts }) =>
+  posts.map(post => {
     return (
       <PostThumbnail
         key={post._id}

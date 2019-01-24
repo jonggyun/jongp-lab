@@ -7,6 +7,7 @@ router.get('/', postCtrl.list);
 router.post('/', postCtrl.write);
 router.get('/:postId', postCtrl.detail);
 router.put('/:postId', postCtrl.modify);
+router.get('/:postId/comment', postCtrl.getComment);
 router.delete('/:postId', postCtrl.remove);
 router.put('/', postCtrl.moveCategory);
 

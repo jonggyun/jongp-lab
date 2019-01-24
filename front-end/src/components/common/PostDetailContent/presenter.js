@@ -47,7 +47,9 @@ PostDetailContent.propType = {
   content: PropType.string,
 };
 
-const Tags = ({ tags }, index) =>
-  tags.map(tag => <Tag key={index} tag={tag} />);
+const Tags = ({ tags }) => {
+  let index = 0;
+  return tags.map(tag => <Tag key={index++} tag={tag} />);
+};
 
 export default PostDetailContent;
