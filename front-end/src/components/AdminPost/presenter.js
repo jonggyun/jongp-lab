@@ -5,7 +5,7 @@ import AdminHeader from 'components/common/AdminHeader';
 import PostThumbnail from 'components/common/PostThumbnail';
 import styles from './styles.module.scss';
 
-const AdminPost = ({ posts }) => (
+const AdminPost = ({ posts, handleAddBtn }) => (
   <div className={styles.wrap}>
     <AdminLeftMenu />
     <section className={styles.rightContent}>

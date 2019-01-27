@@ -22,3 +22,32 @@
     font-size: 15px;
   }
 }
+
+@mixin editor {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 100vh;
+}
+
+@mixin editorInput {
+  height: 60px;
+  background-color: $editor-black;
+  color: $editor-font;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin editorInputBox {
+  height: 40px;
+  width: 98%;
+  border: 0;
+  font-size: 20px;
+  background-color: inherit;
+  color: $editor-font;
+  ::placeholder {
+    color: $editor-font;
+    font-size: 20px;
+  }
+}

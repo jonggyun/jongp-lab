@@ -1,0 +1,44 @@
+.wrap {
+  display: flex;
+  .editor {
+    @include editor;
+    .title {
+      @include editorInput();
+      .input {
+        @include editorInputBox();
+      }
+    }
+    .inputTag {
+      @include editorInput();
+      .input {
+        @include editorInputBox();
+      }
+    }
+  }
+
+  .preview {
+    @include editor;
+    background-color: white;
+    .header {
+      height: 60px;
+      background-color: $editor-black;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .content {
+      flex: auto;
+    }
+    .footer {
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      .tags {
+        width: 98%;
+        border-top: 1px solid $default-border;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
