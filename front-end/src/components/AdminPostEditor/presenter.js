@@ -1,14 +1,16 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './styles.module.scss';
-import EditorButton from 'components/common/EditorButton';
-import Tag from 'components/common/Tag';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import EditorButton from 'components/common/EditorButton';
 import Editor from 'components/common/Editor';
+import MarkdownRender from 'components/common/MarkdownRender';
 
 const cx = classNames.bind(styles);
 
-const AdminPostEditor = ({ editor }) => (
+const AdminPostEditor = ({ handleInputChange, handleSubmit }) => (
   <div className={cx('wrap')}>
     <div className={cx('editor')}>
       <div className={cx('title')}>
@@ -16,6 +18,8 @@ const AdminPostEditor = ({ editor }) => (
           type="text"
           className={cx('input')}
           placeholder="제목을 작성해주세요.."
+          onChange={handleInputChange}
+          name="title"
         />
       </div>
       <Editor />
@@ -24,6 +28,8 @@ const AdminPostEditor = ({ editor }) => (
           type="text"
           className={cx('input')}
           placeholder="태그를 작성해주세요.."
+          onChange={handleInputChange}
+          name="tags"
         />
       </div>
     </div>
@@ -34,18 +40,18 @@ const AdminPostEditor = ({ editor }) => (
         <Link to="/admin/post">
           <EditorButton name="취소" />
         </Link>
-        <EditorButton name="등록" />
+        <EditorButton name="등록" handleClick={handleSubmit} />
       </div>
-      <div className={cx('content')}>미리보기 내용이 줄줄줄</div>
-      <div className={cx('footer')}>
-        <div className={cx('tags')}>
-          <Tag tag="태그1" />
-          <Tag tag="태그2" />
-          <Tag tag="태그3" />
-        </div>
+      <div className={cx('content')}>
+        <MarkdownRender />
       </div>
     </div>
   </div>
 );
+
+AdminPostEditor.propType = {
+  handleInputChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default AdminPostEditor;
