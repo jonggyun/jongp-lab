@@ -7,8 +7,9 @@ const { checkAuth } = require('middlewares/auth');
 
 exports.login = async (req, res, next) => {
   try {
-    const body = req.body;
-    const user = await User.findOne({ id: body.id });
+    //const body = req.body;
+    const { id, password } = req.body;
+    const user = await User.findOne({ id });
 
     console.log('find User!!!!!!!!', user);
 
@@ -17,7 +18,7 @@ exports.login = async (req, res, next) => {
       return;
     }
 
-    bcrpyt.compare(body.password, user.password, (err, hash) => {
+    bcrpyt.compare(password, user.password, (err, hash) => {
       if (err) {
         console.log('bcrypt. compare() error', err.message);
         res.sendStatus(status.INTERNAL_SERVER_ERROR);
@@ -29,7 +30,7 @@ exports.login = async (req, res, next) => {
       //jwt token 발급하기
       const token = jwt.sign(
         {
-          id: body.id,
+          id,
         },
         process.env.JWT_SECRET,
         {
@@ -38,7 +39,7 @@ exports.login = async (req, res, next) => {
         }
       );
 
-      res.json({ isLoggedIn: true, token });
+      res.json({ isLoggedIn: true, token, id });
     });
   } catch (err) {
     console.log(err);

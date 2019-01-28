@@ -6,10 +6,11 @@ const LOG_OUT = 'LOG_OUT';
 const GET_ABOUT = 'GET_ABOUT';
 
 // action creators
-const saveToken = token => {
+const saveToken = (token, id) => {
   return {
     type: SAVE_TOKEN,
     token,
+    id,
   };
 };
 
@@ -46,8 +47,7 @@ const usernameLogin = (id, password) => {
           alert('일치하는 정보가 없습니다');
           return;
         }
-
-        dispatch(saveToken(json.token));
+        dispatch(saveToken(json.token, json.id));
       });
   };
 };
@@ -81,6 +81,7 @@ const initialState = {
   isLoggedIn: localStorage.getItem('jwt') ? true : false,
   token: localStorage.getItem('jwt'),
   about: '',
+  id: '',
 };
 
 // reducer
@@ -99,7 +100,7 @@ const reducer = (state = initialState, action) => {
 
 // reducer function
 const applySetToken = (state, action) => {
-  const { token } = action;
+  const { token, id } = action;
 
   localStorage.setItem('jwt', token);
 
@@ -107,6 +108,7 @@ const applySetToken = (state, action) => {
     ...state,
     isLoggedIn: true,
     token,
+    id,
   };
 };
 

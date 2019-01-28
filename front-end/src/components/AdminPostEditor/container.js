@@ -6,16 +6,29 @@ class Container extends Component {
   state = {
     title: '',
     tags: '',
+    isPublic: true,
   };
+
   static propTyes = {
     setTitle: PropTypes.func.isRequired,
     setTags: PropTypes.func.isRequired,
+    getCategory: PropTypes.func.isRequired,
+    categories: PropTypes.array.isRequired,
   };
+
+  componentDidMount() {
+    const { getCategory } = this.props;
+    getCategory();
+  }
+
   render() {
     return (
       <AdminPostEditor
         handleInputChange={this._handleInputChange}
         handleSubmit={this._handleSubmit}
+        handlePublic={this._handlePublic}
+        isPublic={this.state.isPublic}
+        categories={this.props.categories}
       />
     );
   }
@@ -32,6 +45,13 @@ class Container extends Component {
   _handleSubmit = () => {
     const { title, tags } = this.state;
     console.log('submit', title, tags);
+  };
+
+  _handlePublic = () => {
+    const { isPublic } = this.state;
+    this.setState({
+      isPublic: !isPublic,
+    });
   };
 }
 

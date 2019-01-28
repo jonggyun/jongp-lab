@@ -9,6 +9,10 @@ class Container extends Component {
     content: PropTypes.string.isRequired,
   };
 
+  state = {
+    html: '',
+  };
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.content !== this.props.content) {
       this._handleMarkdown();
@@ -16,27 +20,25 @@ class Container extends Component {
   }
 
   render() {
-    const { content } = this.props;
+    const { html } = this.state;
 
-    const markup = {
-      __html: content,
+    const markdown = {
+      __html: html,
     };
-
-    return <MarkdownRender markup={markup} />;
+    return <MarkdownRender markdown={markdown} />;
   }
 
   _handleMarkdown = () => {
     const { content } = this.props;
-    console.log('여기에요', content);
     if (!content) {
       this.setState({
-        content: '',
+        html: '',
       });
       return;
     }
 
     this.setState({
-      content: marked(content, {
+      html: marked(content, {
         breaks: true, // 엔터 줄 입력
         sanitize: true, // 내부 html 무시
       }),

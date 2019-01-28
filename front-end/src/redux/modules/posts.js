@@ -69,6 +69,27 @@ const getPostDetail = postId => {
   };
 };
 
+const setPost = (title, content, tags) => {
+  // writer, category, title, content, public, tags
+  return (dispatch, getState) => {
+    const {
+      user: { token, id },
+    } = getState();
+    fetch('/admin/post', {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        wrtier: id,
+        title,
+        content,
+        tags,
+      }),
+    });
+  };
+};
+
 // initial state
 const initialState = {};
 
