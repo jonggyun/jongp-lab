@@ -13,7 +13,10 @@ class Container extends Component {
     setTitle: PropTypes.func.isRequired,
     setTags: PropTypes.func.isRequired,
     getCategory: PropTypes.func.isRequired,
+    content: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired,
+    categoryId: PropTypes.string.isRequired,
+    addPost: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -43,8 +46,20 @@ class Container extends Component {
   };
 
   _handleSubmit = () => {
-    const { title, tags } = this.state;
-    console.log('submit', title, tags);
+    const { title, tags, isPublic } = this.state;
+    const { content, categoryId, addPost } = this.props;
+
+    if (!title) {
+      alert('제목을 입력해주세요.');
+      return;
+    }
+
+    if (!tags) {
+      alert('태그를 입력해주세요.');
+      return;
+    }
+    console.log('submit', title, tags, content, isPublic, categoryId);
+    addPost({ title, tags, content, isPublic, category: categoryId });
   };
 
   _handlePublic = () => {

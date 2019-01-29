@@ -11,8 +11,6 @@ exports.login = async (req, res, next) => {
     const { id, password } = req.body;
     const user = await User.findOne({ id });
 
-    console.log('find User!!!!!!!!', user);
-
     if (user === null) {
       res.json({ isLoggedIn: false });
       return;

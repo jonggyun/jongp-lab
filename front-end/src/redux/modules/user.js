@@ -6,11 +6,10 @@ const LOG_OUT = 'LOG_OUT';
 const GET_ABOUT = 'GET_ABOUT';
 
 // action creators
-const saveToken = (token, id) => {
+const saveToken = token => {
   return {
     type: SAVE_TOKEN,
     token,
-    id,
   };
 };
 
@@ -81,7 +80,6 @@ const initialState = {
   isLoggedIn: localStorage.getItem('jwt') ? true : false,
   token: localStorage.getItem('jwt'),
   about: '',
-  id: '',
 };
 
 // reducer
@@ -100,7 +98,7 @@ const reducer = (state = initialState, action) => {
 
 // reducer function
 const applySetToken = (state, action) => {
-  const { token, id } = action;
+  const { token } = action;
 
   localStorage.setItem('jwt', token);
 
@@ -108,7 +106,6 @@ const applySetToken = (state, action) => {
     ...state,
     isLoggedIn: true,
     token,
-    id,
   };
 };
 

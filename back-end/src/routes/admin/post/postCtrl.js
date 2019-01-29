@@ -4,7 +4,7 @@ const User = require('schemas/user');
 const Category = require('schemas/category');
 const Comment = require('schemas/comment');
 
-const { checkAuth } = require('middlewares/auth');
+const { checkAuth, getUserInfo } = require('middlewares/auth');
 
 // 포스팅 전체 리스트 조회
 // 최신순으로 해보기
@@ -59,10 +59,11 @@ exports.write = async (req, res) => {
     // populate를 하려면 objectid로 넣어야 하는듯
     // writer랑 category의 obejctid를 구한 뒤 insert
     let { writer, category, title, content, public, tags } = req.body;
+    const userInfo = await getUserInfo(req);
 
     // trim은 프론트에서 해서 와야겠다.
     tags = tags && tags.split(',');
-    writer = await User.findOne({ id: writer }).select({ _id: 1 });
+    writer = await User.findOne({ id: userInfo.id }).select({ _id: 1 });
     category = await Category.findOne({ id: category }).select({
       _id: -1,
     });
@@ -78,7 +79,7 @@ exports.write = async (req, res) => {
       writer,
       category,
       public,
-      tags,
+      tags: tags.map(tag => tag.trim()),
     });
     await newPost.save();
 

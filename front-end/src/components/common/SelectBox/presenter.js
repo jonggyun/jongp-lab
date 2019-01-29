@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
 
-const SelectBox = ({ items, handleChange }) => (
+const SelectBox = ({ items, handleChange, value }) => (
   <div>
-    <select className={styles.selectBox} onChange={handleChange}>
+    <select className={styles.selectBox} onChange={handleChange} value={value}>
       {items && <Items items={items} />}
     </select>
   </div>

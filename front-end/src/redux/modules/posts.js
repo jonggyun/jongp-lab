@@ -4,6 +4,7 @@ import { actionCreators as userActions } from 'redux/modules/user';
 // actions
 const SET_POSTS = 'SET_POSTS';
 const SET_POST_DETAIL = 'SET_POST_DETAIL';
+const SET_POST_CATEGORY_ID = 'SET_POST_CATEGORY_ID';
 
 // action creators
 const setPosts = posts => {
@@ -17,6 +18,13 @@ const setPostDetail = post => {
   return {
     type: SET_POST_DETAIL,
     post,
+  };
+};
+
+const setPostCategoryId = categoryId => {
+  return {
+    type: SET_POST_CATEGORY_ID,
+    categoryId,
   };
 };
 
@@ -69,7 +77,7 @@ const getPostDetail = postId => {
   };
 };
 
-const setPost = (title, content, tags) => {
+const addPost = ({ title, category, content, isPublic, tags }) => {
   // writer, category, title, content, public, tags
   return (dispatch, getState) => {
     const {
@@ -79,13 +87,20 @@ const setPost = (title, content, tags) => {
       method: 'POST',
       headers: {
         Authorization: token,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        wrtier: id,
+        writer: id,
         title,
+        category,
         content,
+        public: isPublic,
         tags,
       }),
+    }).then(response => {
+      if (response.status === 200) {
+        console.log('저장했드아');
+      }
     });
   };
 };
@@ -100,6 +115,8 @@ const reducer = (state = initialState, action) => {
       return applySetPosts(state, action);
     case SET_POST_DETAIL:
       return applySetPostDetail(state, action);
+    case SET_POST_CATEGORY_ID:
+      return applySetPostCategoryId(state, action);
     default:
       return state;
   }
@@ -122,10 +139,20 @@ const applySetPostDetail = (state, action) => {
   };
 };
 
+const applySetPostCategoryId = (state, action) => {
+  const { categoryId } = action;
+  return {
+    ...state,
+    categoryId,
+  };
+};
+
 // exports
 const actionCreators = {
   getPosts,
   getPostDetail,
+  setPostCategoryId,
+  addPost,
 };
 
 export { actionCreators };

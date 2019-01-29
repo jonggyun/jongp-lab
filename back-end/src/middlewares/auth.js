@@ -2,6 +2,7 @@
  * token 검증하는 미들웨어
  */
 const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 
 exports.checkAuth = req => {
   const {
@@ -18,4 +19,11 @@ exports.checkAuth = req => {
     }
     return { success: true, message: 'token is valid' };
   });
+};
+
+exports.getUserInfo = req => {
+  const {
+    headers: { authorization },
+  } = req;
+  return jwtDecode(authorization);
 };
