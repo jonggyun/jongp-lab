@@ -77,7 +77,7 @@ const getPostDetail = postId => {
   };
 };
 
-const addPost = ({ title, category, content, isPublic, tags }) => {
+const addPost = ({ title, category, content, isPublic, tags, subtitle }) => {
   // writer, category, title, content, public, tags
   return (dispatch, getState) => {
     const {
@@ -92,6 +92,7 @@ const addPost = ({ title, category, content, isPublic, tags }) => {
       body: JSON.stringify({
         writer: id,
         title,
+        subtitle,
         category,
         content,
         public: isPublic,

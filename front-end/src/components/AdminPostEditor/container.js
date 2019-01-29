@@ -58,8 +58,8 @@ class Container extends Component {
       alert('태그를 입력해주세요.');
       return;
     }
-    console.log('submit', title, tags, content, isPublic, categoryId);
-    addPost({ title, tags, content, isPublic, category: categoryId });
+    const subtitle = this.checkRegExp();
+    addPost({ title, tags, content, isPublic, category: categoryId, subtitle });
   };
 
   _handlePublic = () => {
@@ -67,6 +67,16 @@ class Container extends Component {
     this.setState({
       isPublic: !isPublic,
     });
+  };
+
+  checkRegExp = () => {
+    let { content } = this.props;
+    const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/gi;
+    if (regExp.test(content)) {
+      const t = content.replace(regExp, '');
+      content = t.trim();
+    }
+    return content.replace(/\s/g, ' ').slice(0, 100);
   };
 }
 

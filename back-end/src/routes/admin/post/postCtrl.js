@@ -58,7 +58,7 @@ exports.write = async (req, res) => {
     }
     // populate를 하려면 objectid로 넣어야 하는듯
     // writer랑 category의 obejctid를 구한 뒤 insert
-    let { writer, category, title, content, public, tags } = req.body;
+    let { writer, category, title, content, public, tags, subtitle } = req.body;
     const userInfo = await getUserInfo(req);
 
     // trim은 프론트에서 해서 와야겠다.
@@ -75,6 +75,7 @@ exports.write = async (req, res) => {
     const newPost = new Post({
       id: Number(lastPost.id) + 1,
       title,
+      subtitle,
       content,
       writer,
       category,
