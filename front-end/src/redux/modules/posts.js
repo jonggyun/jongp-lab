@@ -78,7 +78,6 @@ const getPostDetail = postId => {
 };
 
 const addPost = ({ title, category, content, isPublic, tags, subtitle }) => {
-  // writer, category, title, content, public, tags
   return (dispatch, getState) => {
     const {
       user: { token, id },
@@ -100,8 +99,23 @@ const addPost = ({ title, category, content, isPublic, tags, subtitle }) => {
       }),
     }).then(response => {
       if (response.status === 200) {
-        console.log('저장했드아');
       }
+    });
+  };
+};
+
+const removePost = postId => {
+  return (dispatch, getState) => {
+    const {
+      user: { token },
+    } = getState();
+    fetch(`/admin/post/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token,
+      },
+    }).then(response => {
+      console.log(response.status);
     });
   };
 };
@@ -154,6 +168,7 @@ const actionCreators = {
   getPostDetail,
   setPostCategoryId,
   addPost,
+  removePost,
 };
 
 export { actionCreators };

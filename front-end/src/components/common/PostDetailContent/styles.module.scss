@@ -42,6 +42,10 @@
   .button {
     width: 40px;
     color: $subtitle;
+    padding: 0 5px;
+    span {
+      cursor: pointer;
+    }
   }
 }
 .thumbnail {

@@ -62,7 +62,6 @@ class Container extends Component {
     if (id === '') id = detail.id;
     if (name === '') name = detail.name;
 
-    console.log(_id, id, name, isPublic);
     modifyCategory(_id, id, name, isPublic);
   };
 

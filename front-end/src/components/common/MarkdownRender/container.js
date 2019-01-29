@@ -14,7 +14,6 @@ class Container extends Component {
   };
   componentDidMount() {
     const { content } = this.props;
-    console.log('did mount', content);
 
     if (content) {
       this.setState({
@@ -43,7 +42,6 @@ class Container extends Component {
 
   _handleMarkdown = () => {
     const { content } = this.props;
-    console.log('handleMarkdown');
     if (!content) {
       this.setState({
         html: '',

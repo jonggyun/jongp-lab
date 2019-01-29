@@ -161,6 +161,7 @@ exports.remove = async (req, res) => {
       return;
     }
     const { postId } = req.params;
+    console.log('remove', postId);
     await Post.remove({ _id: postId });
     res.sendStatus(status.OK);
   } catch (err) {
