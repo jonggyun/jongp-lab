@@ -18,6 +18,7 @@ const AdminPostEditor = ({
   isPublic,
   handlePublic,
   categories,
+  content,
 }) => (
   <div className={cx('wrap')}>
     <div className={cx('editor')}>
@@ -74,7 +75,7 @@ const AdminPostEditor = ({
         <EditorButton name="등록" handleClick={handleSubmit} />
       </div>
       <div className={cx('content')}>
-        <MarkdownRender />
+        <MarkdownRender content={content} />
       </div>
     </div>
   </div>
@@ -85,6 +86,7 @@ AdminPostEditor.propType = {
   handleSubmit: PropTypes.func.isRequired,
   handlePublic: PropTypes.func.isRequired,
   isPublic: PropTypes.bool.isRequired,
+  content: PropTypes.string,
 };
 
 export default AdminPostEditor;

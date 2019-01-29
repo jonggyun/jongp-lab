@@ -32,6 +32,7 @@ class Container extends Component {
         handlePublic={this._handlePublic}
         isPublic={this.state.isPublic}
         categories={this.props.categories}
+        content={this.props.content}
       />
     );
   }
@@ -47,7 +48,7 @@ class Container extends Component {
 
   _handleSubmit = () => {
     const { title, tags, isPublic } = this.state;
-    const { content, categoryId, addPost } = this.props;
+    const { content, categoryId, addPost, history } = this.props;
 
     if (!title) {
       alert('제목을 입력해주세요.');
@@ -60,6 +61,7 @@ class Container extends Component {
     }
     const subtitle = this.checkRegExp();
     addPost({ title, tags, content, isPublic, category: categoryId, subtitle });
+    history.push('/admin/post');
   };
 
   _handlePublic = () => {

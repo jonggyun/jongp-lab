@@ -12,6 +12,19 @@ class Container extends Component {
   state = {
     html: '',
   };
+  componentDidMount() {
+    const { content } = this.props;
+    console.log('did mount', content);
+
+    if (content) {
+      this.setState({
+        html: marked(content, {
+          breaks: true, // 엔터 줄 입력
+          sanitize: true, // 내부 html 무시
+        }),
+      });
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.content !== this.props.content) {
@@ -30,6 +43,7 @@ class Container extends Component {
 
   _handleMarkdown = () => {
     const { content } = this.props;
+    console.log('handleMarkdown');
     if (!content) {
       this.setState({
         html: '',

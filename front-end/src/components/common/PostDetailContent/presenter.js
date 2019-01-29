@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import Tag from 'components/common/Tag';
 import dateFormat from 'dateformat';
 import defaultThunmbnail from 'images/default.png';
 import defaultProfile from 'images/default-profile-picture.jpg';
 import PropType from 'prop-types';
+
+import Tag from 'components/common/Tag';
+import MarkdownRender from 'components/common/MarkdownRender';
 
 const PostDetailContent = ({ post }) => (
   <div>
@@ -31,7 +33,9 @@ const PostDetailContent = ({ post }) => (
       src={post.thumbnail || defaultThunmbnail}
       alt="thumbnail"
     />
-    <div className={styles.content}>{post.content}</div>
+    <div className={styles.content}>
+      <MarkdownRender content={post.content} />
+    </div>
     <div className={styles.tags}>
       <Tags tags={post.tags} />
     </div>
