@@ -24,6 +24,10 @@ class Editor extends Component {
   editor = null;
   codeMirror = null;
 
+  state = {
+    content: '',
+  };
+
   initializeEditor = () => {
     this.codeMirror = CodeMirror(this.editor, {
       mode: 'markdown',
@@ -38,6 +42,13 @@ class Editor extends Component {
     this.initializeEditor();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.post && this.props.content === '') {
+      this.codeMirror.setValue(nextProps.post.content);
+    }
+    return true;
+  }
+
   render() {
     return <div className={styles.editor} ref={ref => (this.editor = ref)} />;
   }
@@ -50,14 +61,17 @@ class Editor extends Component {
 
 Editor.propType = {
   setContent: PropTypes.func.isRequired,
+  content: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
   const {
     editor: { content },
+    posts: { post },
   } = state;
   return {
     content,
+    post,
   };
 };
 

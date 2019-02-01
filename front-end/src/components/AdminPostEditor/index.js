@@ -9,12 +9,13 @@ const mapStateToProps = (state, action) => {
   const {
     editor: { content },
     category: { categories },
-    posts: { categoryId },
+    posts: { categoryId, post },
   } = state;
   return {
     content,
     categories,
     categoryId,
+    post,
   };
 };
 
@@ -24,6 +25,9 @@ const mapDispatchToProps = (dispatch, action) => {
     setTags: tags => dispatch(editorActions.setTags(tags)),
     getCategory: () => dispatch(categoryActions.getCategory()),
     addPost: data => dispatch(postsActions.addPost(data)),
+    modifyPost: data => dispatch(postsActions.modifyPost(data)),
+    getPostDetail: postId => dispatch(postsActions.getPostDetail(postId)),
+    setPostDetail: post => dispatch(postsActions.setPostDetail(post)),
   };
 };
 

@@ -9,7 +9,13 @@ class Container extends Component {
   };
   render() {
     const { post } = this.props;
-    return <PostDetailContent post={post} handleDelete={this._handleDelete} />;
+    return (
+      <PostDetailContent
+        post={post}
+        handleDelete={this._handleDelete}
+        handleModify={this._handleModify}
+      />
+    );
   }
 
   _handleDelete = () => {
@@ -20,10 +26,20 @@ class Container extends Component {
       removePost,
       history,
     } = this.props;
-    console.log('match', postId);
     removePost(postId);
 
     history.push('/admin/post');
+  };
+
+  _handleModify = () => {
+    const {
+      match: {
+        params: { postId },
+      },
+      history,
+    } = this.props;
+
+    history.push(`/admin/editor/${postId}`);
   };
 }
 

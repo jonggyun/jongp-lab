@@ -29,6 +29,7 @@ const PrivateRoutes = props => {
       <Route path="/admin/category" component={AdminCategory} />
       <Route exact path="/admin/post" component={AdminPost} />
       <Route exact path="/admin/editor" component={AdminPostEditor} />
+      <Route path="/admin/editor/:postId" component={AdminPostEditor} />
       <Route path="/admin/post/:postId" component={AdminPostDetail} />
     </React.Fragment>
   );

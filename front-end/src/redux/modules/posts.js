@@ -104,6 +104,40 @@ const addPost = ({ title, category, content, isPublic, tags, subtitle }) => {
   };
 };
 
+const modifyPost = ({
+  title,
+  category,
+  content,
+  isPublic,
+  tags,
+  subtitle,
+  postId,
+}) => {
+  return (dispatch, getState) => {
+    const {
+      user: { token },
+    } = getState();
+    fetch(`/admin/post/${postId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        //category, // 이거 서버에서 objectId로 걸려있는데?? 어찌 바꾸지??????
+        content,
+        public: isPublic,
+        tags,
+      }),
+    }).then(response => {
+      if (response.status === 200) {
+        console.log('수정완료');
+      }
+    });
+  };
+};
+
 const removePost = postId => {
   return (dispatch, getState) => {
     const {
@@ -168,7 +202,9 @@ const actionCreators = {
   getPostDetail,
   setPostCategoryId,
   addPost,
+  modifyPost,
   removePost,
+  setPostDetail,
 };
 
 export { actionCreators };

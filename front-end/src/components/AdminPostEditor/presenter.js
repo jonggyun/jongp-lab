@@ -15,10 +15,14 @@ const cx = classNames.bind(styles);
 const AdminPostEditor = ({
   handleInputChange,
   handleSubmit,
+  handleModify,
   isPublic,
   handlePublic,
   categories,
   content,
+  title,
+  tags,
+  type,
 }) => (
   <div className={cx('wrap')}>
     <div className={cx('editor')}>
@@ -29,6 +33,7 @@ const AdminPostEditor = ({
           placeholder="제목을 작성해주세요.."
           onChange={handleInputChange}
           name="title"
+          value={title}
         />
       </div>
       <Editor />
@@ -39,6 +44,7 @@ const AdminPostEditor = ({
           placeholder="태그를 작성해주세요.."
           onChange={handleInputChange}
           name="tags"
+          value={tags}
         />
       </div>
     </div>
@@ -72,7 +78,10 @@ const AdminPostEditor = ({
         <Link to="/admin/post">
           <EditorButton name="취소" />
         </Link>
-        <EditorButton name="등록" handleClick={handleSubmit} />
+        <EditorButton
+          name={type === 'create' ? '등록' : '수정'}
+          handleClick={handleSubmit}
+        />
       </div>
       <div className={cx('content')}>
         <MarkdownRender content={content} />
