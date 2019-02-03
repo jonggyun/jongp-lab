@@ -14,7 +14,6 @@ class Container extends Component {
   };
   componentDidMount() {
     const { content } = this.props;
-
     if (content) {
       this.setState({
         html: marked(content, {

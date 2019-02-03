@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Ionicons from 'react-ionicons';
 
 import EditorButton from 'components/common/EditorButton';
-import Editor from 'components/common/Editor';
+import MarkdownEditor from 'components/common/MarkdownEditor';
 import MarkdownRender from 'components/common/MarkdownRender';
 import SelectBox from 'components/common/SelectBox';
 
@@ -15,7 +15,6 @@ const cx = classNames.bind(styles);
 const AdminPostEditor = ({
   handleInputChange,
   handleSubmit,
-  handleModify,
   isPublic,
   handlePublic,
   categories,
@@ -36,7 +35,7 @@ const AdminPostEditor = ({
           value={title}
         />
       </div>
-      <Editor />
+      <MarkdownEditor initContent={content} />
       <div className={cx('inputTag')}>
         <input
           type="text"

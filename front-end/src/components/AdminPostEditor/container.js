@@ -8,12 +8,13 @@ class Container extends Component {
     tags: '',
     isPublic: true,
     post: '',
-    type: 'create',
+    type: '',
   };
 
   static propTyes = {
     setTitle: PropTypes.func.isRequired,
     setTags: PropTypes.func.isRequired,
+    setContent: PropTypes.func.isRequired,
     getCategory: PropTypes.func.isRequired,
     content: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired,
@@ -49,33 +50,37 @@ class Container extends Component {
       },
       getPostDetail,
     } = this.props;
-    if (postId) {
-      getPostDetail(postId);
-      this.setState({
-        type: 'modify',
-      });
-    }
+
+    postId
+      ? this.setState({ type: 'modify' })
+      : this.setState({ type: 'create' });
+
+    postId && getPostDetail(postId);
     getCategory();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.post && nextProps.post !== prevState.post) {
-      const {
-        post: { title, tags },
-      } = nextProps;
+    const {
+      match: {
+        params: { postId },
+      },
+      post,
+      setContent,
+    } = nextProps;
+    if (postId && post && prevState.title === '') {
+      setContent(post.content);
       return {
-        post: nextProps.post,
-        title,
-        tags,
+        post,
+        title: post.title,
+        tags: post.tags,
       };
     }
     return null;
   }
 
   render() {
-    const { isPublic, title, type, tags } = this.state;
+    const { isPublic, title, tags, type } = this.state;
     const { categories, content } = this.props;
-
     return (
       <AdminPostEditor
         handleInputChange={this._handleInputChange}
@@ -89,11 +94,6 @@ class Container extends Component {
         type={type}
       />
     );
-  }
-
-  componentWillUnmount() {
-    const { setPostDetail } = this.props;
-    setPostDetail();
   }
 
   _handleInputChange = event => {
@@ -144,7 +144,8 @@ class Container extends Component {
       postId,
     };
     console.log('send data', data);
-    type === 'create' ? addPost(data) : modifyPost(data);
+    type === 'create' && addPost(data);
+    type === 'modify' && modifyPost(data);
     history.push('/admin/post');
   };
 

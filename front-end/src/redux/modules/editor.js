@@ -2,12 +2,22 @@
 
 // actions
 const SET_CONTENT = 'SET_CONTENT';
+const INITIALIZE_EDITOR = 'INITIALIZE_EDITOR';
 
 // action creators
 const setContent = content => {
   return {
     type: SET_CONTENT,
     content,
+  };
+};
+
+const initializeEditor = ({ title, content, tags }) => {
+  return {
+    type: INITIALIZE_EDITOR,
+    title,
+    content,
+    tags,
   };
 };
 
@@ -25,6 +35,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CONTENT:
       return applySetContent(state, action);
+    case INITIALIZE_EDITOR:
+      return applyInitializeEditor(state, action);
     default:
       return state;
   }
@@ -39,9 +51,19 @@ const applySetContent = (state, action) => {
   };
 };
 
+const applyInitializeEditor = (state, action) => {
+  const { title, content, tags } = action;
+  return {
+    title,
+    content,
+    tags,
+  };
+};
+
 // exports
 const actionCreators = {
   setContent,
+  initializeEditor,
 };
 
 export { actionCreators };

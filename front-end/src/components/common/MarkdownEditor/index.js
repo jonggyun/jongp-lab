@@ -24,10 +24,6 @@ class Editor extends Component {
   editor = null;
   codeMirror = null;
 
-  state = {
-    content: '',
-  };
-
   initializeEditor = () => {
     this.codeMirror = CodeMirror(this.editor, {
       mode: 'markdown',
@@ -42,11 +38,21 @@ class Editor extends Component {
     this.initializeEditor();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.post && this.props.content === '') {
-      this.codeMirror.setValue(nextProps.post.content);
+  componentDidUpdate(prevProps, prevState) {
+    const { setContent, initContent } = this.props;
+    if (
+      prevProps.initContent === '' ||
+      (prevProps.initContent === undefined && initContent)
+    ) {
+      setContent(initContent);
+      this.codeMirror.setValue(initContent);
     }
-    return true;
+  }
+
+  componentWillUnmount() {
+    const { initializeEditor } = this.props;
+    const data = {};
+    initializeEditor(data);
   }
 
   render() {
@@ -75,10 +81,13 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (disaptch, ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     setContent: content => {
-      return disaptch(editorActions.setContent(content));
+      return dispatch(editorActions.setContent(content));
+    },
+    initializeEditor: data => {
+      return dispatch(editorActions.initializeEditor(data));
     },
   };
 };

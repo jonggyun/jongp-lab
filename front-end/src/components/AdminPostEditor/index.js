@@ -28,6 +28,7 @@ const mapDispatchToProps = (dispatch, action) => {
     modifyPost: data => dispatch(postsActions.modifyPost(data)),
     getPostDetail: postId => dispatch(postsActions.getPostDetail(postId)),
     setPostDetail: post => dispatch(postsActions.setPostDetail(post)),
+    setContent: content => dispatch(editorActions.setContent(content)),
   };
 };
 

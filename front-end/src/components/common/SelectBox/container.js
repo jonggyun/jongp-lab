@@ -16,10 +16,13 @@ class Container extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.value === '') {
       const { setPostCategoryId } = this.props;
-      this.setState({
-        value: this.props.items[0].id,
-      });
-      setPostCategoryId(this.props.items[0].id);
+
+      if (this.props.items) {
+        this.setState((state, props) => ({
+          value: props.items[0].id,
+        }));
+        setPostCategoryId(this.props.items[0].id);
+      }
     }
   }
 
