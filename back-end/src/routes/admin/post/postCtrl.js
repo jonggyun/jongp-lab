@@ -14,7 +14,7 @@ exports.list = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     console.log('success', success);
     // 일단 정렬은 id 역순으로 해두기.
@@ -54,7 +54,7 @@ exports.write = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     // populate를 하려면 objectid로 넣어야 하는듯
     // writer랑 category의 obejctid를 구한 뒤 insert
@@ -98,7 +98,7 @@ exports.detail = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     const { postId } = req.params;
     const detail = await Post.findOne({ _id: postId }).populate(
@@ -120,7 +120,7 @@ exports.modify = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     const { postId } = req.params;
     const { title, content, public, tags } = req.body;
@@ -158,7 +158,7 @@ exports.remove = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     const { postId } = req.params;
     console.log('remove', postId);

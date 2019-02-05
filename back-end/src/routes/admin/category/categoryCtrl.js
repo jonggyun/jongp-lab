@@ -11,7 +11,7 @@ exports.getCategories = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     const categories = await Category.find().sort({ order: 1 });
     // 없을 경우 no content
@@ -50,7 +50,7 @@ exports.createCategory = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     // 마지막 order 가져오기
     const lastCategory = await Category.findOne()
@@ -80,7 +80,7 @@ exports.modifyCategory = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     // $set을 하지 않으면 부분 변경이 아닌 전체가 req.body로 바뀐다. 주의!!
     await Category.findByIdAndUpdate(req.body._id, { $set: req.body });
@@ -98,7 +98,7 @@ exports.removeCategory = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     await Category.remove({ _id: req.body.id });
     res.sendStatus(status.OK);
@@ -118,7 +118,7 @@ exports.getPostByCategory = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     const { categoryId } = req.params;
     await Post.find()

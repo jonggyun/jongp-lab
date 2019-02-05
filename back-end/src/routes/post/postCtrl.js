@@ -88,7 +88,7 @@ exports.modifyComment = async (req, res) => {
       }
       if (!hash) {
         res.sendStatus(status.UNAUTHORIZED);
-        return;
+        return res.redirect('/admin');
       }
       // 찾아서 업데이트
       Comment.findByIdAndUpdate(commentId, {

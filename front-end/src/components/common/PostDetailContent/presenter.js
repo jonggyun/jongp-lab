@@ -22,7 +22,7 @@ const PostDetailContent = ({ post, handleDelete, handleModify }) => (
     </div>
     <div className={styles.titles}>
       <div className={styles.title}>{post.title}</div>
-      <div className={styles.subtitle}>{post.subtitle}</div>
+      {/* <div className={styles.subtitle}>{post.subtitle}</div> */}
     </div>
     <div className={styles.buttons}>
       <div className={styles.button}>

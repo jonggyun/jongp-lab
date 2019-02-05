@@ -23,7 +23,7 @@ exports.login = async (req, res, next) => {
       }
       if (!hash) {
         res.sendStatus(status.UNAUTHORIZED);
-        return;
+        return res.redirect('/admin');
       }
       //jwt token 발급하기
       const token = jwt.sign(
@@ -54,7 +54,7 @@ exports.getAbout = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
     const { about } = await User.findOne({ auth: 'admin' });
     res.json(about);
@@ -71,7 +71,7 @@ exports.modifyAbout = async (req, res) => {
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
-      return;
+      return res.redirect('/admin');
     }
 
     const { id } = await getUserInfo(req);

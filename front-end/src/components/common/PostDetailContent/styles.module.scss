@@ -17,12 +17,12 @@
   }
 }
 .titles {
-  height: 120px;
   display: flex;
   flex-direction: column;
+  margin: 0.5rem 0;
   .title {
     font-size: 30px;
-    height: 40px;
+    height: auto;
     display: flex;
     align-items: center;
     font-weight: 600;

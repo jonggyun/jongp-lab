@@ -11,7 +11,7 @@ const AdminAbout = ({ about, handleSubmit }) => (
   <div className={styles.wrap}>
     <div className={styles.header}>
       <Link to="/admin/">
-        <EditorButton name="취소" />
+        <EditorButton name="나가기" />
       </Link>
       <EditorButton name="저장" handleClick={handleSubmit} />
     </div>
