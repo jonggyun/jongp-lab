@@ -143,7 +143,6 @@ class Container extends Component {
       subtitle,
       postId,
     };
-    console.log('send data', data);
     type === 'create' && addPost(data);
     type === 'modify' && modifyPost(data);
     history.push('/admin/post');

@@ -3,7 +3,7 @@ const bcrpyt = require('bcrypt');
 const status = require('http-status');
 const jwt = require('jsonwebtoken');
 
-const { checkAuth } = require('middlewares/auth');
+const { checkAuth, getUserInfo } = require('middlewares/auth');
 
 exports.login = async (req, res, next) => {
   try {
@@ -73,8 +73,11 @@ exports.modifyAbout = async (req, res) => {
       res.sendStatus(status.UNAUTHORIZED);
       return;
     }
-    const { about, id } = req.body;
+
+    const { id } = await getUserInfo(req);
+    const { about } = req.body;
     const { _id } = await User.findOne({ id, auth: 'admin' });
+
     await User.update({ _id, auth: 'admin' }, { about: about });
 
     res.sendStatus(status.OK);

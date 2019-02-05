@@ -4,6 +4,7 @@
 const SAVE_TOKEN = 'SAVE_TOKEN';
 const LOG_OUT = 'LOG_OUT';
 const GET_ABOUT = 'GET_ABOUT';
+const SET_ABOUT = 'SET_ABOUT';
 
 // action creators
 const saveToken = token => {
@@ -22,6 +23,13 @@ const logout = () => {
 const getAbout = about => {
   return {
     type: GET_ABOUT,
+    about,
+  };
+};
+
+const setAbout = about => {
+  return {
+    type: SET_ABOUT,
     about,
   };
 };
@@ -75,6 +83,28 @@ const getAdminAbout = () => {
   };
 };
 
+const saveAdminAbout = () => {
+  return (dispatch, getState) => {
+    const {
+      user: { token, about },
+    } = getState();
+    fetch('/admin/about', {
+      method: 'PUT',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        about,
+      }),
+    }).then(response => {
+      if (response.status === 200) {
+        alert('저장하였습니다.');
+      }
+    });
+  };
+};
+
 // initial state
 const initialState = {
   isLoggedIn: localStorage.getItem('jwt') ? true : false,
@@ -91,6 +121,8 @@ const reducer = (state = initialState, action) => {
       return applyLogout(state, action);
     case GET_ABOUT:
       return applyGetAbout(state, action);
+    case SET_ABOUT:
+      return applySetAbout(state, action);
     default:
       return state;
   }
@@ -124,12 +156,22 @@ const applyGetAbout = (state, action) => {
   };
 };
 
+const applySetAbout = (state, action) => {
+  const { about } = action;
+  return {
+    ...state,
+    about,
+  };
+};
+
 // exports
 
 const actionCreators = {
   usernameLogin,
   logout,
   getAdminAbout,
+  setAbout,
+  saveAdminAbout,
 };
 
 export { actionCreators };

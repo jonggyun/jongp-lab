@@ -1,12 +1,21 @@
 .wrap {
-  margin-left: $left-size;
-  .rightContent {
-    .template {
-      width: 785px;
-      background-color: white;
-      margin-left: 4rem;
-      border-radius: 1rem;
-      height: 80vh;
+  .header {
+    @include editorInput();
+  }
+  .content {
+    height: calc(100vh - 60px);
+    display: flex;
+    .editor {
+      height: 100vh;
+      @include editor();
+    }
+
+    .preview {
+      @include editor();
+      box-sizing: border-box;
+      padding: 1.5rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 60px);
     }
   }
 }

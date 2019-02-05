@@ -14,9 +14,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getAdminAbout: () => {
-      dispatch(userActions.getAdminAbout());
-    },
+    getAdminAbout: () => dispatch(userActions.getAdminAbout()),
+    setAbout: about => dispatch(userActions.setAbout(about)),
+    saveAdminAbout: () => dispatch(userActions.saveAdminAbout()),
   };
 };
 

@@ -19,6 +19,7 @@ import 'codemirror/mode/css/css';
 import 'codemirror/mode/shell/shell';
 
 import { actionCreators as editorActions } from 'redux/modules/editor';
+import { actionCreators as userActions } from 'redux/modules/user';
 
 class Editor extends Component {
   editor = null;
@@ -36,6 +37,8 @@ class Editor extends Component {
 
   componentDidMount() {
     this.initializeEditor();
+    const { type } = this.props;
+    type === 'about' && this.codeMirror.setValue(this.props.initContent);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -60,13 +63,14 @@ class Editor extends Component {
   }
 
   _handleChangeContent = doc => {
-    const { setContent } = this.props;
-    setContent(doc.getValue());
+    const { type, setContent, setAbout } = this.props;
+    type === 'about' ? setAbout(doc.getValue()) : setContent(doc.getValue());
   };
 }
 
 Editor.propType = {
   setContent: PropTypes.func.isRequired,
+  setAbout: PropTypes.func,
   content: PropTypes.string.isRequired,
 };
 
@@ -85,6 +89,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     setContent: content => {
       return dispatch(editorActions.setContent(content));
+    },
+    setAbout: about => {
+      return dispatch(userActions.setAbout(about));
     },
     initializeEditor: data => {
       return dispatch(editorActions.initializeEditor(data));

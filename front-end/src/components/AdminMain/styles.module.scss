@@ -1,3 +1,15 @@
 .wrap {
   display: flex;
+  .rightContent {
+    margin-left: $left-size;
+    flex: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 2;
+  }
 }
