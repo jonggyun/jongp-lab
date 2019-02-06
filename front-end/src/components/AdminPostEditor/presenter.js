@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 const AdminPostEditor = ({
   handleInputChange,
   handleSubmit,
+  handleUploadFile,
   isPublic,
   handlePublic,
   categories,
@@ -73,6 +74,10 @@ const AdminPostEditor = ({
               onClick={handlePublic}
             />
           )}
+        </div>
+        <div className={cx('filebox')}>
+          <label htmlFor="ex_file">썸네일</label>
+          <input type="file" id="ex_file" onChange={handleUploadFile} />
         </div>
         <Link to="/admin/post">
           <EditorButton name="취소" />

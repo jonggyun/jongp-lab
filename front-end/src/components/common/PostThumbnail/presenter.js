@@ -24,7 +24,11 @@ const PostThumbnail = ({
           <img
             className={styles.thumbnail}
             alt="thumbnail"
-            src={thumbnail ? thumbnailPath : defaultThunmbnail}
+            src={
+              thumbnail
+                ? 'http://localhost:8001/' + thumbnail
+                : defaultThunmbnail
+            }
           />
         </Link>
       </div>

@@ -9,6 +9,7 @@ class Container extends Component {
     isPublic: true,
     post: '',
     type: '',
+    thumbnail: '',
   };
 
   static propTyes = {
@@ -86,6 +87,7 @@ class Container extends Component {
         handleInputChange={this._handleInputChange}
         handleSubmit={this._handleSubmit}
         handlePublic={this._handlePublic}
+        handleUploadFile={this._handleUploadFile}
         isPublic={isPublic}
         categories={categories}
         content={content}
@@ -106,7 +108,7 @@ class Container extends Component {
   };
 
   _handleSubmit = () => {
-    const { title, isPublic, type } = this.state;
+    const { title, isPublic, type, thumbnail } = this.state;
     let { tags } = this.state;
     const {
       content,
@@ -142,7 +144,10 @@ class Container extends Component {
       category: categoryId,
       subtitle,
       postId,
+      thumbnail: thumbnail ? thumbnail : false,
     };
+
+    console.log('data!!!', data);
     type === 'create' && addPost(data);
     type === 'modify' && modifyPost(data);
     history.push('/admin/post');
@@ -163,6 +168,16 @@ class Container extends Component {
       content = t.trim();
     }
     return content.replace(/\s/g, ' ').slice(0, 100);
+  };
+
+  _handleUploadFile = event => {
+    const {
+      target: { files },
+    } = event;
+    console.log('files', files[0]);
+    this.setState({
+      thumbnail: files[0],
+    });
   };
 }
 

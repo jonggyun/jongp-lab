@@ -1,4 +1,6 @@
 const status = require('http-status');
+const fs = require('fs');
+
 const Post = require('schemas/post');
 const User = require('schemas/user');
 const Category = require('schemas/category');
@@ -50,7 +52,7 @@ exports.list = async (req, res) => {
 // 포스팅 작성하기
 exports.write = async (req, res) => {
   try {
-    // 로그인 검증 하기
+    //로그인 검증 하기
     const { success } = await checkAuth(req);
     if (!success) {
       res.sendStatus(status.UNAUTHORIZED);
@@ -58,8 +60,17 @@ exports.write = async (req, res) => {
     }
     // populate를 하려면 objectid로 넣어야 하는듯
     // writer랑 category의 obejctid를 구한 뒤 insert
-    let { writer, category, title, content, public, tags, subtitle } = req.body;
+    let {
+      writer,
+      category,
+      title,
+      content,
+      isPublic,
+      tags,
+      subtitle,
+    } = req.body;
     const userInfo = await getUserInfo(req);
+    const { filename, path } = req.file;
 
     // trim은 프론트에서 해서 와야겠다.
     tags = tags && tags.split(',');
@@ -79,8 +90,10 @@ exports.write = async (req, res) => {
       content,
       writer,
       category,
-      public,
+      public: isPublic,
       tags: tags.map(tag => tag.trim()),
+      thumbnail: filename,
+      thumbnailPath: path,
     });
     await newPost.save();
 
@@ -124,11 +137,27 @@ exports.modify = async (req, res) => {
     }
     const { postId } = req.params;
     const { title, content, public, tags } = req.body;
-
+    const { filename, path } = req.file;
     const tagArr = tags && tags.split(',');
 
+    const preData = await Post.findOne({ _id: postId }).select({
+      thumbnailPath: 1,
+    });
+
+    fs.unlink(preData.thumbnailPath, err => {
+      if (err) throw err;
+      console.log('successfully remove file.');
+    });
+
     await Post.findByIdAndUpdate(postId, {
-      $set: { title, content, public, tags: tagArr },
+      $set: {
+        title,
+        content,
+        public,
+        tags: tagArr,
+        thumbnail: filename,
+        thumbnailPath: path,
+      },
     });
     res.sendStatus(status.OK);
   } catch (err) {

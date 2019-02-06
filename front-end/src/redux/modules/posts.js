@@ -77,28 +77,36 @@ const getPostDetail = postId => {
   };
 };
 
-const addPost = ({ title, category, content, isPublic, tags, subtitle }) => {
+const addPost = ({
+  title,
+  category,
+  content,
+  isPublic,
+  tags,
+  subtitle,
+  thumbnail,
+}) => {
   return (dispatch, getState) => {
     const {
-      user: { token, id },
+      user: { token },
     } = getState();
+    const fd = new FormData();
+    fd.append('title', title);
+    fd.append('category', category);
+    fd.append('content', content);
+    fd.append('isPublic', isPublic);
+    fd.append('tags', tags);
+    fd.append('subtitle', subtitle);
+    fd.append('thumbnail', thumbnail);
     fetch('/admin/post', {
       method: 'POST',
       headers: {
         Authorization: token,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        writer: id,
-        title,
-        subtitle,
-        category,
-        content,
-        public: isPublic,
-        tags,
-      }),
+      body: fd,
     }).then(response => {
       if (response.status === 200) {
+        console.log('success');
       }
     });
   };
@@ -112,24 +120,25 @@ const modifyPost = ({
   tags,
   subtitle,
   postId,
+  thumbnail,
 }) => {
   return (dispatch, getState) => {
     const {
       user: { token },
     } = getState();
+    const fd = new FormData();
+    fd.append('title', title);
+    fd.append('category', category);
+    fd.append('content', content);
+    fd.append('public', isPublic);
+    fd.append('tags', tags);
+    fd.append('thumbnail', thumbnail);
     fetch(`/admin/post/${postId}`, {
       method: 'PUT',
       headers: {
         Authorization: token,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        title,
-        //category, // 이거 서버에서 objectId로 걸려있는데?? 어찌 바꾸지??????
-        content,
-        public: isPublic,
-        tags,
-      }),
+      body: fd,
     }).then(response => {
       if (response.status === 200) {
         console.log('수정완료');

@@ -28,8 +28,8 @@ const Posts = ({ posts }) =>
         id={post._id}
         title={post.title}
         subtitle={post.subtitle}
-        thumnbnail={post.thumnbnail}
-        thumnbnailPath={post.thumnbnailPath}
+        thumbnail={post.thumbnail}
+        thumbnailPath={post.thumbnailPath}
         writer={post.writer}
         createdAt={post.createdAt}
       />

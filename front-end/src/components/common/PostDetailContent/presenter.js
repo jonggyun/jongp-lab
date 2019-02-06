@@ -34,7 +34,11 @@ const PostDetailContent = ({ post, handleDelete, handleModify }) => (
     </div>
     <img
       className={styles.thumbnail}
-      src={post.thumbnail || defaultThunmbnail}
+      src={
+        post.thumbnail
+          ? 'http://localhost:8001/' + post.thumbnail
+          : defaultThunmbnail
+      }
       alt="thumbnail"
     />
     <div className={styles.content}>

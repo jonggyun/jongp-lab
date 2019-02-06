@@ -10,8 +10,9 @@ const app = express();
 connect(); // 몽고디비 연결.
 
 app.set('port', process.env.PORT || 8001);
-app.set({ 'content-type': 'application/json; charset=utf-8' });
+//app.set({ 'content-type': 'application/json; charset=utf-8' });
 app.use(morgan('dev'));
+app.use(express.static('uploads'));
 /** body-parser 역할 시작 */
 app.use(express.json());
 // extended: false -> querystring 모듈 사용, true -> qs 모듈 사용
