@@ -29,6 +29,7 @@ const upload = multer({
 
 router.get('/', postCtrl.list);
 router.post('/', upload.single('thumbnail'), postCtrl.write);
+router.get('/:type(old)/:lastPostId', postCtrl.oldPosts);
 router.get('/:postId', postCtrl.detail);
 router.put('/:postId', upload.single('thumbnail'), postCtrl.modify);
 router.get('/:postId/comment', postCtrl.getComment);

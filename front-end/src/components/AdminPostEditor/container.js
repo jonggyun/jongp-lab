@@ -147,7 +147,6 @@ class Container extends Component {
       thumbnail: thumbnail ? thumbnail : false,
     };
 
-    console.log('data!!!', data);
     type === 'create' && addPost(data);
     type === 'modify' && modifyPost(data);
     history.push('/admin/post');
@@ -174,7 +173,6 @@ class Container extends Component {
     const {
       target: { files },
     } = event;
-    console.log('files', files[0]);
     this.setState({
       thumbnail: files[0],
     });

@@ -8,6 +8,8 @@ const Comment = require('schemas/comment');
 
 const { checkAuth, getUserInfo } = require('middlewares/auth');
 
+const LIST_COUNT = 20;
+
 // 포스팅 전체 리스트 조회
 // 최신순으로 해보기
 exports.list = async (req, res) => {
@@ -18,13 +20,13 @@ exports.list = async (req, res) => {
       res.sendStatus(status.UNAUTHORIZED);
       return res.redirect('/admin');
     }
-    console.log('success', success);
     // 일단 정렬은 id 역순으로 해두기.
     const list = await Post.find()
       .sort({ id: -1 })
       .populate('writer')
       .populate('category')
       .lean()
+      .limit(LIST_COUNT)
       .exec();
     if (list.length === 0) {
       res.sendStatus(status.NO_CONTENT);
@@ -41,8 +43,39 @@ exports.list = async (req, res) => {
           ? post.subtitle
           : `${post.subtitle.slice(0, 50)}...`),
     }));
-
     res.json(posts);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
+};
+
+exports.oldPosts = async (req, res) => {
+  try {
+    const { lastPostId } = req.params;
+    const newPosts = await Post.find()
+      .sort({ id: -1 })
+      .lt('id', lastPostId)
+      .populate('writer')
+      .populate('category')
+      .lean()
+      .limit(LIST_COUNT)
+      .exec();
+
+    const posts = newPosts.map(post => ({
+      ...post,
+      title:
+        post.title.length < 13 ? post.title : `${post.title.slice(0, 13)}...`,
+      subtitle:
+        post.subtitle &&
+        (post.subtitle.length < 50
+          ? post.subtitle
+          : `${post.subtitle.slice(0, 50)}...`),
+    }));
+
+    const isLast = newPosts.length < LIST_COUNT ? true : false;
+    console.log('isLast!!!!!', isLast);
+    res.json({ posts, isLast });
   } catch (err) {
     console.log(err);
     res.sendStatus(status.BAD_REQUEST);

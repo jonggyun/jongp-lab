@@ -5,6 +5,7 @@ import { actionCreators as userActions } from 'redux/modules/user';
 const SET_POSTS = 'SET_POSTS';
 const SET_POST_DETAIL = 'SET_POST_DETAIL';
 const SET_POST_CATEGORY_ID = 'SET_POST_CATEGORY_ID';
+const SET_MORE_POSTS = 'SET_MORE_POSTS';
 
 // action creators
 const setPosts = posts => {
@@ -25,6 +26,14 @@ const setPostCategoryId = categoryId => {
   return {
     type: SET_POST_CATEGORY_ID,
     categoryId,
+  };
+};
+
+const setMorePosts = ({ posts, isLast }) => {
+  return {
+    type: SET_MORE_POSTS,
+    posts,
+    isLast,
   };
 };
 
@@ -49,6 +58,30 @@ const getPosts = () => {
       })
       .then(json => {
         dispatch(setPosts(json));
+      });
+  };
+};
+
+const getOldPosts = lastPostId => {
+  return (dispatch, getState) => {
+    const {
+      user: { token },
+    } = getState();
+    fetch(`/admin/post/old/${lastPostId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(userActions.logout());
+          return;
+        }
+        return response.json();
+      })
+      .then(json => {
+        dispatch(setMorePosts(json));
       });
   };
 };
@@ -164,7 +197,9 @@ const removePost = postId => {
 };
 
 // initial state
-const initialState = {};
+const initialState = {
+  isLast: false,
+};
 
 // reducer
 const reducer = (state = initialState, action) => {
@@ -175,6 +210,8 @@ const reducer = (state = initialState, action) => {
       return applySetPostDetail(state, action);
     case SET_POST_CATEGORY_ID:
       return applySetPostCategoryId(state, action);
+    case SET_MORE_POSTS:
+      return applySetMorePosts(state, action);
     default:
       return state;
   }
@@ -205,15 +242,27 @@ const applySetPostCategoryId = (state, action) => {
   };
 };
 
+const applySetMorePosts = (state, action) => {
+  const { posts, isLast } = action;
+  return {
+    ...state,
+    posts: state.posts.concat(posts),
+    isLast,
+  };
+};
+
 // exports
 const actionCreators = {
   getPosts,
+  getOldPosts,
+  setPosts,
   getPostDetail,
   setPostCategoryId,
   addPost,
   modifyPost,
   removePost,
   setPostDetail,
+  setMorePosts,
 };
 
 export { actionCreators };
