@@ -4,11 +4,11 @@ import Container from './container';
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    user,
+    admin,
     router: { location },
   } = state;
   return {
-    isLoggedIn: user.isLoggedIn,
+    isLoggedIn: admin.isLoggedIn,
     pathname: location.pathname,
   };
 };

@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import './styles.module.scss';
 import PropTypes from 'prop-types';
 
+import UserPost from 'components/UserPost';
+
 import AdminLogin from 'components/AdminLogin';
 import AdminMain from 'components/AdminMain';
 import AdminAbout from 'components/AdminAbout';
@@ -24,6 +26,7 @@ App.propTypes = {
 const PrivateRoutes = props => {
   return (
     <React.Fragment>
+      <Route exact path="/" component={UserPost} />
       <Route exact path="/admin" component={AdminMain} />
       <Route path="/admin/about" component={AdminAbout} />
       <Route path="/admin/category" component={AdminCategory} />
@@ -37,7 +40,7 @@ const PrivateRoutes = props => {
 
 const PublicRoutes = props => (
   <Switch>
-    <Route exact path="/" render={() => 'main page!!'} />
+    <Route exact path="/" component={UserPost} />
     <Route exact path="/admin" component={AdminLogin} />
   </Switch>
 );

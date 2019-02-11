@@ -4,7 +4,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router'; // 찾
 import createHistory from 'history/createBrowserHistory'; // 찾아보기
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import user from 'redux/modules/user';
+import admin from 'redux/modules/admin';
 import category from 'redux/modules/category';
 import posts from 'redux/modules/posts';
 import comment from 'redux/modules/comment';
@@ -26,7 +26,7 @@ if (env === 'development') {
 
 const reducer = () =>
   combineReducers({
-    user,
+    admin,
     category,
     posts,
     comment,

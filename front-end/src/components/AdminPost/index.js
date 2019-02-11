@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
   } = state;
   return {
     posts,
+    isLast,
   };
 };
 

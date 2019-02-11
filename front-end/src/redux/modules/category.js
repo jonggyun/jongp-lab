@@ -1,5 +1,5 @@
 // imports
-import { actionCreators as userActions } from 'redux/modules/user';
+import { actionCreators as adminActions } from 'redux/modules/admin';
 // actions
 const SET_CATEGORY = 'SET_CATEGORY';
 const SET_CLICK_MODAL = 'SET_CLICK_MODAL';
@@ -39,7 +39,7 @@ const setCategoryDetail = detail => {
 const getCategory = () => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch('/admin/category', {
       method: 'GET',
@@ -49,7 +49,7 @@ const getCategory = () => {
     })
       .then(response => {
         if (response.status === 401) {
-          dispatch(userActions.logout());
+          dispatch(adminActions.logout());
           return;
         }
         return response.json();
@@ -73,7 +73,7 @@ const getCategoryDetail = _id => {
 const createCategory = (id, name, isPublic) => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch('/admin/category', {
       method: 'POST',
@@ -101,7 +101,7 @@ const createCategory = (id, name, isPublic) => {
 const deleteCategory = id => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch('/admin/category', {
       method: 'DELETE',
@@ -124,7 +124,7 @@ const deleteCategory = id => {
 const modifyCategory = (_id, id, name, isPublic) => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch('/admin/category', {
       method: 'PUT',

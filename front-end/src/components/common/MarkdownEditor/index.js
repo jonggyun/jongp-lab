@@ -19,7 +19,7 @@ import 'codemirror/mode/css/css';
 import 'codemirror/mode/shell/shell';
 
 import { actionCreators as editorActions } from 'redux/modules/editor';
-import { actionCreators as userActions } from 'redux/modules/user';
+import { actionCreators as adminActions } from 'redux/modules/admin';
 
 class Editor extends Component {
   editor = null;
@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return dispatch(editorActions.setContent(content));
     },
     setAbout: about => {
-      return dispatch(userActions.setAbout(about));
+      return dispatch(adminActions.setAbout(about));
     },
     initializeEditor: data => {
       return dispatch(editorActions.initializeEditor(data));

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Container from './container';
-import { actionCreators as userActions } from 'redux/modules/user';
+import { actionCreators as adminActions } from 'redux/modules/admin';
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -14,9 +14,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getAdminAbout: () => dispatch(userActions.getAdminAbout()),
-    setAbout: about => dispatch(userActions.setAbout(about)),
-    saveAdminAbout: () => dispatch(userActions.saveAdminAbout()),
+    getAdminAbout: () => dispatch(adminActions.getAdminAbout()),
+    setAbout: about => dispatch(adminActions.setAbout(about)),
+    saveAdminAbout: () => dispatch(adminActions.saveAdminAbout()),
   };
 };
 

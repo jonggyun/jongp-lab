@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Container from './container';
-import { actionCreators as userActions } from 'redux/modules/user';
+import { actionCreators as adminActions } from 'redux/modules/admin';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     usernameLogin: (username, password) => {
-      dispatch(userActions.usernameLogin(username, password));
+      dispatch(adminActions.usernameLogin(username, password));
     },
   };
 };

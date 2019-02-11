@@ -1,5 +1,5 @@
 // imports
-import { actionCreators as userActions } from 'redux/modules/user';
+import { actionCreators as adminActions } from 'redux/modules/admin';
 
 // actions
 const SET_POSTS = 'SET_POSTS';
@@ -41,7 +41,7 @@ const setMorePosts = ({ posts, isLast }) => {
 const getPosts = () => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch('/admin/post', {
       method: 'GET',
@@ -51,7 +51,7 @@ const getPosts = () => {
     })
       .then(response => {
         if (response.status === 401) {
-          dispatch(userActions.logout());
+          dispatch(adminActions.logout());
           return;
         }
         return response.json();
@@ -65,7 +65,7 @@ const getPosts = () => {
 const getOldPosts = lastPostId => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch(`/admin/post/old/${lastPostId}`, {
       method: 'GET',
@@ -75,7 +75,7 @@ const getOldPosts = lastPostId => {
     })
       .then(response => {
         if (response.status === 401) {
-          dispatch(userActions.logout());
+          dispatch(adminActions.logout());
           return;
         }
         return response.json();
@@ -89,7 +89,7 @@ const getOldPosts = lastPostId => {
 const getPostDetail = postId => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch(`/admin/post/${postId}`, {
       method: 'GET',
@@ -99,7 +99,7 @@ const getPostDetail = postId => {
     })
       .then(response => {
         if (response.status === 401) {
-          dispatch(userActions.logout());
+          dispatch(adminActions.logout());
           return;
         }
         return response.json();
@@ -121,7 +121,7 @@ const addPost = ({
 }) => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     const fd = new FormData();
     fd.append('title', title);
@@ -157,7 +157,7 @@ const modifyPost = ({
 }) => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     const fd = new FormData();
     fd.append('title', title);
@@ -183,7 +183,7 @@ const modifyPost = ({
 const removePost = postId => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch(`/admin/post/${postId}`, {
       method: 'DELETE',
