@@ -3,16 +3,24 @@ import PropTypes from 'prop-types';
 import PostThumbnailExp from './presenter';
 
 class Container extends Component {
-  propType = {
-    getPosts: PropTypes.func.isRequired,
-  };
-  componentDidMount() {
-    const { getPosts } = this.props;
-    getPosts();
-  }
+  propType = {};
+  componentDidMount() {}
   render() {
-    const { posts } = this.props;
-    return <PostThumbnailExp />;
+    console.log('this.props', this.props.writer.name);
+    const {
+      title,
+      subtitle,
+      writer: { name },
+      createdAt,
+    } = this.props;
+    return (
+      <PostThumbnailExp
+        title={title}
+        subtitle={subtitle}
+        writer={name}
+        createdAt={createdAt}
+      />
+    );
   }
 }
 

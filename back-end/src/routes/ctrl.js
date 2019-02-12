@@ -1,4 +1,5 @@
 const status = require('http-status');
+const Category = require('schemas/category');
 const Post = require('schemas/post');
 const User = require('schemas/user');
 
@@ -6,6 +7,20 @@ exports.getAbout = async (req, res) => {
   try {
     const { about } = await User.findOne({ auth: 'admin' });
     res.json(about);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
+};
+// 사용자화면에 카테고리 전체 가져오기
+exports.getCategories = async (req, res) => {
+  try {
+    const categories = await Category.find().sort({ order: 1 });
+    if (!categories || categories.length === 0) {
+      res.sendStatus(status.NO_CONTENT);
+      return;
+    }
+    res.send(categories);
   } catch (err) {
     console.log(err);
     res.sendStatus(status.BAD_REQUEST);

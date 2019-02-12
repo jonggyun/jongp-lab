@@ -9,6 +9,7 @@ router.use('/admin', adminRouter);
 router.use('/post', postRouter);
 
 router.get('/about', ctrl.getAbout);
+router.get('/category', ctrl.getCategories);
 router.get('/category/:categoryId', ctrl.getPostByCategory);
 router.get('/tag/:tag', ctrl.getPostByTag);
 router.get('/keyword/:keyword', ctrl.getPostByKeyword);

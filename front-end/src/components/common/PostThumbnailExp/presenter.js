@@ -2,30 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 
+import dateFormat from 'dateformat';
+
 import defaultThunmbnail from 'images/default.png';
 import defaultProfile from 'images/default-profile-picture.jpg';
 
-const PostThumbnailExp = ({ thumbnail, writer }) => {
+const PostThumbnailExp = ({
+  thumbnail,
+  title,
+  subtitle,
+  writer,
+  createdAt,
+}) => {
   return (
-    <div className={styles.postFrame}>
+    <section className={styles.postFrame}>
       <img
         className={styles.thumbnail}
         alt="thumbnail"
         src={defaultThunmbnail}
       />
-      <div className={styles.title}>여기가 제목</div>
-      <div className={styles.subTitle}>여기가 요약</div>
-      <div className={styles.info}>
-        <span className={styles.userName}>유저이름</span>
-        <span className={styles.createdAt}>2019-01-01</span>
+      <div className={styles.title}>{title}</div>
+      <div className={styles.subTitle}>{subtitle}</div>
+      <div className={styles.footer}>
+        <div className={styles.info}>
+          <span className={styles.userName}>{writer}</span>
+          <span className={styles.createdAt}>
+            {dateFormat(createdAt, 'isoDate')}
+          </span>
+        </div>
+        <img
+          className={styles.profileImage}
+          alt="profile"
+          src={defaultProfile}
+        />
       </div>
-      <img className={styles.profileImage} alt="profile" src={defaultProfile} />
-    </div>
+    </section>
   );
 };
 
 PostThumbnailExp.propType = {
-  posts: PropTypes.array.isRequired,
+  thumbnail: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default PostThumbnailExp;

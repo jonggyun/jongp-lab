@@ -1,0 +1,56 @@
+.postFrame {
+  width: 629px;
+  height: 475px;
+  //border: 1px solid black;
+  box-shadow: 1px 1px 1px 1px #cecece;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  margin-bottom: 50px;
+  .thumbnail {
+    width: 100%;
+    object-fit: cover;
+    height: 295px;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    height: 50px;
+  }
+  .subTitle {
+    margin-left: 0.5rem;
+    font-size: 20px;
+    color: $subtitle;
+    height: 30px;
+  }
+  .footer {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    color: $subtitle;
+    font-size: 15px;
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding-right: 10px;
+      .userName {
+        padding-bottom: 5px;
+      }
+      .createdAt {
+        padding-top: 5px;
+      }
+    }
+    .profileImage {
+      width: 54px;
+      height: 54px;
+      border-radius: 30px;
+    }
+  }
+}

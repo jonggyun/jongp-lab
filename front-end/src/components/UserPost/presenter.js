@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import UserHeader from 'components/common/UserHeader';
 import PostThumbnailExp from 'components/common/PostThumbnailExp';
 
-const UserPost = ({ categories }) => (
+const UserPost = ({ categories, posts }) => (
   <section className={styles.wrapper}>
     <UserHeader />
     <div className={styles.content}>
@@ -18,18 +18,20 @@ const UserPost = ({ categories }) => (
           </ul>
         </nav>
       </div>
-      <div className={styles.posts}>
-        <PostThumbnailExp />
-      </div>
+      <div className={styles.posts}>{posts && <Posts posts={posts} />}</div>
     </div>
   </section>
 );
 
 UserPost.propType = {
   categoires: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 const Categoires = ({ categories }) =>
   categories.map(category => <li key={category.id}>{category.name}</li>);
+
+const Posts = ({ posts }) =>
+  posts.map(post => <PostThumbnailExp key={post._id} {...post} />);
 
 export default UserPost;

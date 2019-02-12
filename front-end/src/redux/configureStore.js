@@ -9,6 +9,8 @@ import category from 'redux/modules/category';
 import posts from 'redux/modules/posts';
 import comment from 'redux/modules/comment';
 import editor from 'redux/modules/editor';
+import userSearch from 'redux/modules/userSearch';
+import userPosts from 'redux/modules/userPosts';
 
 // node의 process를 이용하면 현재 개발인지 운영인지 확인할 수 있다.
 const env = process.env.NODE_ENV;
@@ -31,6 +33,8 @@ const reducer = () =>
     posts,
     comment,
     editor,
+    userSearch,
+    userPosts,
     router: connectRouter(history),
   });
 

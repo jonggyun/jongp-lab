@@ -4,19 +4,21 @@ import UserPost from './presenter';
 
 class Container extends Component {
   propType = {
-    getCategory: PropTypes.func.isRequired,
+    getCategories: PropTypes.func.isRequired,
+    getPosts: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
+    posts: PropTypes.array.isRequired,
   };
 
   componentDidMount() {
-    const { getCategory } = this.props;
-    getCategory();
+    const { getCategories, getPosts } = this.props;
+    getCategories();
+    getPosts();
   }
 
   render() {
-    const { categories } = this.props;
-    console.log(categories);
-    return <UserPost categories={categories} />;
+    const { categories, posts } = this.props;
+    return <UserPost categories={categories} posts={posts} />;
   }
 }
 
