@@ -2,22 +2,19 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Container from './container';
 
-import { actionCreators as userActions } from 'redux/modules/userSearch';
 import { actionCreators as userPostsActions } from 'redux/modules/userPosts';
 
 const mapStateToProps = (state, ownProps) => {
-  const { categories } = state.userSearch;
-  const { posts } = state.userPosts;
+  const { post } = state.userPosts;
   return {
-    categories,
-    posts,
+    post,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  const { postId } = ownProps.match.params;
   return {
-    getCategories: () => dispatch(userActions.getCategories()),
-    getPosts: () => dispatch(userPostsActions.getPosts()),
+    getPostDetail: () => dispatch(userPostsActions.getPostDetail(postId)),
   };
 };
 

@@ -5,15 +5,16 @@ import PropTypes from 'prop-types';
 import UserHeader from 'components/common/UserHeader';
 import PostThumbnailExp from 'components/common/PostThumbnailExp';
 
+import Ionicons from 'react-ionicons';
+
 const UserPost = ({ categories, posts }) => (
   <section className={styles.wrapper}>
     <UserHeader />
     <div className={styles.content}>
       <div className={styles.left}>
-        <div className={styles.title}>Category</div>
         <nav className={styles.categories}>
           <ul>
-            <li>전체보기</li>
+            <li>All</li>
             {categories && <Categoires categories={categories} />}
           </ul>
         </nav>

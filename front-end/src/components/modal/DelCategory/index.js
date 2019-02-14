@@ -3,7 +3,7 @@ import Container from './container';
 import { withRouter } from 'react-router-dom';
 import { actionCreators as categoryActions } from 'redux/modules/category';
 
-const mapStateToProps = (state, action) => {
+const mapStateToProps = (state, ownProps) => {
   const {
     category: { id },
   } = state;
@@ -13,7 +13,7 @@ const mapStateToProps = (state, action) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, action) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     deleteCategory: id => {
       dispatch(categoryActions.deleteCategory(id));

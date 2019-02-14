@@ -12,12 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const {
-    match: {
-      params: { postId },
-    },
-  } = ownProps;
-
+  const { postId } = ownProps.match.param;
   return {
     getPostDetail: () => dispatch(postActions.getPostDetail(postId)),
   };

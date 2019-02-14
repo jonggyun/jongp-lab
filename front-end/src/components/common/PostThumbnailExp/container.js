@@ -6,8 +6,8 @@ class Container extends Component {
   propType = {};
   componentDidMount() {}
   render() {
-    console.log('this.props', this.props.writer.name);
     const {
+      _id,
       title,
       subtitle,
       writer: { name },
@@ -15,6 +15,7 @@ class Container extends Component {
     } = this.props;
     return (
       <PostThumbnailExp
+        id={_id}
         title={title}
         subtitle={subtitle}
         writer={name}

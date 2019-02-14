@@ -5,7 +5,7 @@ import { actionCreators as editorActions } from 'redux/modules/editor';
 import { actionCreators as categoryActions } from 'redux/modules/category';
 import { actionCreators as postsActions } from 'redux/modules/posts';
 
-const mapStateToProps = (state, action) => {
+const mapStateToProps = (state, ownProps) => {
   const {
     editor: { content },
     category: { categories },
@@ -19,7 +19,7 @@ const mapStateToProps = (state, action) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, action) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     setTitle: title => dispatch(editorActions.setTitle(title)),
     setTags: tags => dispatch(editorActions.setTags(tags)),

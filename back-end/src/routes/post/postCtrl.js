@@ -22,6 +22,7 @@ exports.getAllPost = async (req, res) => {
 // 사용자 포스팅 상세 페이지
 exports.getDetail = async (req, res) => {
   try {
+    console.log('postsssss');
     const { postId } = req.params;
     const post = await Post.findOne({ _id: postId })
       .populate('writer', 'id name')

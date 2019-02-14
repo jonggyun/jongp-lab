@@ -1,0 +1,13 @@
+.wrapper {
+  background-color: white;
+  width: 100%;
+  min-height: 130vh;
+  display: flex;
+  justify-content: center;
+  .postDetail {
+    margin-top: 5rem;
+    width: 49.0625rem;
+    height: 61.25rem;
+    background-color: white;
+  }
+}

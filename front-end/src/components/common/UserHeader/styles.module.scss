@@ -1,6 +1,9 @@
 .header {
-  height: 70px;
-  background-color: $default-white;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 3.125rem;
+  background-color: #764abc;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,16 +12,16 @@
 
   span {
     font-size: $user-header;
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
     cursor: pointer;
-    font-weight: 600;
-  }
-  span:hover {
-    color: #868e96;
+    color: white;
   }
   div {
-    padding-right: 20px;
+    padding-right: 1.25rem;
     display: inherit;
     align-items: center;
+  }
+  .title {
+    font-weight: 600;
   }
 }

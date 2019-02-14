@@ -5,11 +5,11 @@ import Ionicons from 'react-ionicons';
 
 const UserHeader = () => (
   <div className={styles.header}>
-    <span>jong-lab</span>
+    <span className={styles.title}>jong-lab</span>
     <div>
       <span>Home</span>
       <span>About</span>
-      <Ionicons fontSize="30px" icon="ios-search" color="black" />
+      <Ionicons fontSize="1.25rem" icon="ios-search" color="white" />
     </div>
   </div>
 );
