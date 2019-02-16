@@ -1,56 +1,59 @@
 .postFrame {
-  width: 629px;
-  height: 475px;
+  width: 39.3125rem;
+  height: 29.6875rem;
   //border: 1px solid black;
   box-shadow: 1px 1px 1px 1px #cecece;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem;
   .thumbnail {
     width: 100%;
     object-fit: cover;
-    height: 295px;
+    height: 18.4375rem;
+    &:hover {
+      opacity: 0.9;
+    }
   }
   .title {
     display: flex;
     align-items: center;
-    font-size: 26px;
+    font-size: 1.625rem;
     font-weight: 600;
     margin-left: 0.5rem;
-    height: 50px;
+    height: 3.125rem;
   }
   .subTitle {
     margin-left: 0.5rem;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: $subtitle;
-    height: 30px;
+    height: 1.875rem;
   }
   .footer {
     display: flex;
-    height: 80px;
+    height: 5rem;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 20px;
+    padding-right: 1.25rem;
     color: $subtitle;
-    font-size: 15px;
+    font-size: 0.9375rem;
     .info {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      padding-right: 10px;
+      padding-right: 0.625rem;
       .userName {
-        padding-bottom: 5px;
+        padding-bottom: 0.3125rem;
       }
       .createdAt {
-        padding-top: 5px;
+        padding-top: 0.3125rem;
       }
     }
     .profileImage {
-      width: 54px;
-      height: 54px;
-      border-radius: 30px;
+      width: 3.375rem;
+      height: 3.375rem;
+      border-radius: 1.875rem;
     }
   }
 }

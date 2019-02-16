@@ -34,6 +34,7 @@ exports.getPostByCategory = async (req, res) => {
 
     await Post.find()
       .sort({ id: -1 })
+      .populate('writer')
       .populate('category')
       .exec((err, posts) => {
         const postList = posts.filter(post => {

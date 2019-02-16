@@ -4,6 +4,7 @@ const postCtrl = require('./postCtrl');
 const router = express.Router();
 
 router.get('/', postCtrl.getAllPost);
+router.get('/:type(old)/:lastPostId', postCtrl.oldPosts);
 router.get('/:postId', postCtrl.getDetail);
 router.get('/:postId/comment', postCtrl.getComment);
 router.post('/:postId/comment', postCtrl.addComment);

@@ -1,20 +1,19 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import UserHeader from 'components/common/UserHeader';
 import PostThumbnailExp from 'components/common/PostThumbnailExp';
 
-import Ionicons from 'react-ionicons';
-
-const UserPost = ({ categories, posts }) => (
+const UserPost = ({ categories, posts, handlePosts }) => (
   <section className={styles.wrapper}>
     <UserHeader />
     <div className={styles.content}>
       <div className={styles.left}>
         <nav className={styles.categories}>
-          <ul>
-            <li>All</li>
+          <ul onClick={handlePosts}>
+            <li name="all">All</li>
             {categories && <Categoires categories={categories} />}
           </ul>
         </nav>
@@ -27,10 +26,15 @@ const UserPost = ({ categories, posts }) => (
 UserPost.propType = {
   categoires: PropTypes.array.isRequired,
   posts: PropTypes.array.isRequired,
+  handlePosts: PropTypes.func.isRequired,
 };
 
 const Categoires = ({ categories }) =>
-  categories.map(category => <li key={category.id}>{category.name}</li>);
+  categories.map(category => (
+    <li key={category.id} name={category.id}>
+      {category.name}
+    </li>
+  ));
 
 const Posts = ({ posts }) =>
   posts.map(post => <PostThumbnailExp key={post._id} {...post} />);

@@ -4,15 +4,63 @@ const bcrpyt = require('bcrypt');
 const Post = require('schemas/post');
 const Comment = require('schemas/comment');
 
+const LIST_COUNT = 10;
+
 // 사용자 전체 포스팅 조회
 exports.getAllPost = async (req, res) => {
   try {
     const list = await Post.find()
       .sort({ id: -1 })
       .populate('writer', 'id name')
-      .populate('category', 'id name');
+      .populate('category', 'id name')
+      .lean()
+      .limit(LIST_COUNT)
+      .exec();
 
-    res.json(list);
+    if (list.length === 0) return res.sendStatus(status.NO_CONTENT);
+
+    const posts = list.map(post => ({
+      ...post,
+      title:
+        post.title.length < 13 ? post.title : `${post.title.slice(0, 13)}...`,
+      subtitle:
+        post.subtitle &&
+        (post.subtitle.length < 50
+          ? post.subtitle
+          : `${post.subtitle.slice(0, 50)}...`),
+    }));
+    res.json(posts);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(status.BAD_REQUEST);
+  }
+};
+
+exports.oldPosts = async (req, res) => {
+  try {
+    console.log('in oldPosts');
+    const { lastPostId } = req.params;
+    const newPosts = await Post.find()
+      .sort({ id: -1 })
+      .lt('id', lastPostId)
+      .populate('writer')
+      .populate('category')
+      .lean()
+      .limit(LIST_COUNT)
+      .exec();
+    const posts = newPosts.map(post => ({
+      ...post,
+      title:
+        post.title.length < 13 ? post.title : `${post.title.slice(0, 13)}...`,
+      subtitle:
+        post.subtitle &&
+        (post.subtitle.length < 50
+          ? post.subtitle
+          : `${post.subtitle.slice(0, 50)}...`),
+    }));
+    const isLast = newPosts.length < LIST_COUNT ? true : false;
+    console.log('result!!!!', posts, isLast);
+    res.json({ posts, isLast });
   } catch (err) {
     console.log(err);
     res.sendStatus(status.BAD_REQUEST);

@@ -18,6 +18,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getCategories: () => dispatch(userActions.getCategories()),
     getPosts: () => dispatch(userPostsActions.getPosts()),
+    getCategoryPosts: categoryId =>
+      dispatch(userPostsActions.getCategoryPosts(categoryId)),
+    setUserPost: () => dispatch(userPostsActions.setUserPost()),
+    getOldPosts: lastPostId =>
+      dispatch(userPostsActions.getOldPosts(lastPostId)),
+    setUserPosts: () => dispatch(userPostsActions.setUserPosts()),
   };
 };
 

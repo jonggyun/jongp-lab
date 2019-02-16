@@ -31,7 +31,6 @@ class Container extends Component {
 
   render() {
     const { post } = this.props;
-    console.log('post', post);
     return <UserPostDetail post={post} />;
   }
 }

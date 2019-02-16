@@ -11,8 +11,8 @@
   box-sizing: border-box;
 
   span {
-    font-size: $user-header;
-    padding: 0 1.25rem;
+    font-size: 1rem;
+    padding-left: 1.25rem;
     cursor: pointer;
     color: white;
   }
@@ -23,5 +23,10 @@
   }
   .title {
     font-weight: 600;
+    font-size: $user-header;
+  }
+
+  .icon {
+    padding-left: 1.25rem;
   }
 }

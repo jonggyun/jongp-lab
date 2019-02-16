@@ -3,6 +3,7 @@
 // actions
 const SET_USER_POSTS = 'SET_USER_POSTS';
 const SET_USER_POST_DETAIL = 'SET_USER_POST_DETAIL';
+const SET_USER_MORE_POSTS = 'SET_USER_MORE_POSTS';
 
 // action creators
 const setUserPosts = posts => {
@@ -16,6 +17,14 @@ const setUserPostDetail = post => {
   return {
     type: SET_USER_POST_DETAIL,
     post,
+  };
+};
+
+const setUserMorePosts = ({ posts, isLast }) => {
+  return {
+    type: SET_USER_MORE_POSTS,
+    posts,
+    isLast,
   };
 };
 
@@ -39,9 +48,28 @@ const getPostDetail = postId => {
         return response.json();
       })
       .then(json => {
-        console.log('json!!!!', json);
         dispatch(setUserPostDetail(json));
       });
+  };
+};
+
+const getOldPosts = lastPostId => {
+  return dispatch => {
+    fetch(`/post/old/${lastPostId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(json => dispatch(setUserMorePosts(json)));
+  };
+};
+
+const getCategoryPosts = categoryId => {
+  return dispatch => {
+    fetch(`/category/${categoryId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(json => dispatch(setUserPosts(json)));
   };
 };
 
@@ -54,6 +82,8 @@ const reducer = (state = initialState, action) => {
       return applySetUserPosts(state, action);
     case SET_USER_POST_DETAIL:
       return applySetUserPostDetail(state, action);
+    case SET_USER_MORE_POSTS:
+      return applySetUserMorePosts(state, action);
     default:
       return state;
   }
@@ -76,10 +106,22 @@ const applySetUserPostDetail = (state, action) => {
   };
 };
 
+const applySetUserMorePosts = (state, action) => {
+  const { posts, isLast } = action;
+  return {
+    ...state,
+    posts: state.posts.concat(posts),
+    isLast,
+  };
+};
+
 // exports
 const actionCreators = {
   getPosts,
+  getCategoryPosts,
   getPostDetail,
+  getOldPosts,
+  setUserPosts,
 };
 
 export { actionCreators };
