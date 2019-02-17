@@ -1,25 +1,20 @@
-Create personal Blog Project
+Personal blog creation project
 
-# Personal Blog..
+# Personal Blog
 
 ## About
 
-> 개인 블로그 웹
-> 애플리케이션
-
-## Project Duration
-
->
+> Personal blog web application
 
 ## Project Specification
 
 > Client
 
-- reactjs, es6
+- reactjs, es6, sass, redux, redux-thunk
 
 > Server
 
-- node.js (express)
+- node.js (express), JWT token
 
 > Database
 
@@ -52,4 +47,59 @@ Create personal Blog Project
     ├── index.js
     ├── post.js
     └── user.js
+```
+
+### Front-End
+
+```
+├── components
+│   ├── AdminAbout
+│   ├── AdminCategory
+│   ├── AdminLogin
+│   ├── AdminMain
+│   ├── AdminPost
+│   ├── AdminPostDetail
+│   ├── AdminPostEditor
+│   ├── App
+│   ├── UserAbout
+│   ├── UserPost
+│   ├── UserPostDetail
+│   ├── common
+│   │   ├── AdminHeader
+│   │   ├── AdminLeftMenu
+│   │   ├── Button
+│   │   ├── EditorButton
+│   │   ├── MarkdownEditor
+│   │   ├── MarkdownRender
+│   │   ├── Modal
+│   │   ├── PostDetail
+│   │   ├── PostDetailComment
+│   │   ├── PostDetailContent
+│   │   ├── PostThumbnail
+│   │   ├── PostThumbnailExp
+│   │   ├── SelectBox
+│   │   ├── Tag
+│   │   └── UserHeader
+│   └── modal
+│       ├── AddCategory
+│       ├── DelCategory
+│       └── ModCategory
+├── config
+│   ├── _colors.scss
+│   ├── _mixins.scss
+│   ├── _sizes.scss
+│   └── _variables.scss
+├── images
+├── index.js
+└── redux
+    ├── configureStore.js
+    └── modules
+        ├── admin.js
+        ├── category.js
+        ├── comment.js
+        ├── editor.js
+        ├── posts.js
+        ├── userAbout.js
+        ├── userPosts.js
+        └── userSearch.js
 ```
