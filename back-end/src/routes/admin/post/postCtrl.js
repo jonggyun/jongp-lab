@@ -176,7 +176,7 @@ exports.modify = async (req, res) => {
     const preData = await Post.findOne({ _id: postId }).select({
       thumbnailPath: 1,
     });
-
+    console.log('preData', preData);
     fs.unlink(preData.thumbnailPath, err => {
       if (err) throw err;
       console.log('successfully remove file.');

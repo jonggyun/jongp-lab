@@ -53,11 +53,16 @@ const getPostDetail = postId => {
   };
 };
 
-const getOldPosts = lastPostId => {
+const getOldPosts = (lastPostId, selectedCategoryId) => {
   return dispatch => {
-    fetch(`/post/old/${lastPostId}`, {
-      method: 'GET',
-    })
+    fetch(
+      selectedCategoryId === 'all'
+        ? `/post/old/${lastPostId}`
+        : `/post/old/${lastPostId}/${selectedCategoryId}`,
+      {
+        method: 'GET',
+      }
+    )
       .then(response => response.json())
       .then(json => dispatch(setUserMorePosts(json)));
   };

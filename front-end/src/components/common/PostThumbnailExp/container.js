@@ -12,6 +12,7 @@ class Container extends Component {
       subtitle,
       writer: { name },
       createdAt,
+      thumbnail,
     } = this.props;
     return (
       <PostThumbnailExp
@@ -20,6 +21,7 @@ class Container extends Component {
         subtitle={subtitle}
         writer={name}
         createdAt={createdAt}
+        thumbnail={thumbnail}
       />
     );
   }

@@ -6,6 +6,7 @@ const User = require('schemas/user');
 exports.getAbout = async (req, res) => {
   try {
     const { about } = await User.findOne({ auth: 'admin' });
+    console.log(about);
     res.json(about);
   } catch (err) {
     console.log(err);

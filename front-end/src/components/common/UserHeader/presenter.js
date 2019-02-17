@@ -16,12 +16,12 @@ const UserHeader = () => (
       <Link to="/about">
         <span>About</span>
       </Link>
-      <Ionicons
+      {/* <Ionicons
         className={styles.icon}
         fontSize="1.25rem"
         icon="ios-search"
         color="white"
-      />
+      /> */}
     </div>
   </div>
 );

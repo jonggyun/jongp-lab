@@ -14,13 +14,14 @@ class Container extends Component {
   };
   state = {
     loading: false,
+    selectedCategory: 'all',
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { getCategories, getPosts } = this.props;
     getCategories();
     getPosts();
-    console.log(this.state.loading);
     window.addEventListener('scroll', this._handleScroll);
   }
 
@@ -39,7 +40,7 @@ class Container extends Component {
       <UserPost
         categories={categories}
         posts={posts}
-        handlePosts={this._handlePosts}
+        handleClick={this._handleClick}
       />
     );
   }
@@ -47,33 +48,38 @@ class Container extends Component {
   _handleScroll = () => {
     const { innerHeight } = window;
     const { scrollHeight } = document.body;
+    const { loading, selectedCategory } = this.state;
     // IE에서는 document.documentElement 를 사용.
     const scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
     if (scrollHeight - innerHeight - scrollTop < 100) {
-      if (!this.state.loading && !this.props.isLast && this.props.posts) {
+      const { isLast, posts, getOldPosts } = this.props;
+      if (!loading && !isLast && posts) {
         this.setState({
           loading: true,
         });
-        const lastPostId = this.props.posts[this.props.posts.length - 1].id;
-        this.props.getOldPosts(lastPostId);
+        const lastPostId = posts[posts.length - 1].id;
+        getOldPosts(lastPostId, selectedCategory);
       }
     } else {
-      if (this.state.loading) {
+      if (loading) {
         this.setState({
           loading: false,
         });
-        console.log(this.state.loading);
       }
     }
   };
 
-  _handlePosts = event => {
+  _handleClick = event => {
     const name = event.target.getAttribute('name');
     const { getPosts, getCategoryPosts } = this.props;
-    //console.log(event.target, name);
+
+    window.scrollTo(0, 0);
     name === 'all' ? getPosts() : getCategoryPosts(name);
+    this.setState({
+      selectedCategory: name,
+    });
   };
 }
 

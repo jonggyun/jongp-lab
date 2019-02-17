@@ -3,6 +3,7 @@ const bcrpyt = require('bcrypt');
 
 const Post = require('schemas/post');
 const Comment = require('schemas/comment');
+const Category = require('schemas/category');
 
 const LIST_COUNT = 10;
 
@@ -38,8 +39,14 @@ exports.getAllPost = async (req, res) => {
 
 exports.oldPosts = async (req, res) => {
   try {
-    console.log('in oldPosts');
-    const { lastPostId } = req.params;
+    const { lastPostId, categoryId } = req.params;
+    console.log('여기', lastPostId, categoryId);
+
+    const category =
+      categoryId &&
+      (await Category.findOne({ id: categoryId }).select({ _id: 1 }));
+    console.log('category!!', category);
+
     const newPosts = await Post.find()
       .sort({ id: -1 })
       .lt('id', lastPostId)
@@ -59,7 +66,6 @@ exports.oldPosts = async (req, res) => {
           : `${post.subtitle.slice(0, 50)}...`),
     }));
     const isLast = newPosts.length < LIST_COUNT ? true : false;
-    console.log('result!!!!', posts, isLast);
     res.json({ posts, isLast });
   } catch (err) {
     console.log(err);

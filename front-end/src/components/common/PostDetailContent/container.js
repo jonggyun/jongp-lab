@@ -9,9 +9,12 @@ class Container extends Component {
   };
   render() {
     const { post } = this.props;
+    const { path } = this.props.match;
+    const isAdmin = path.indexOf('/admin') > -1;
     return (
       <PostDetailContent
         post={post}
+        isAdmin={isAdmin}
         handleDelete={this._handleDelete}
         handleModify={this._handleModify}
       />

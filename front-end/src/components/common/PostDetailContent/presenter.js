@@ -8,7 +8,7 @@ import PropType from 'prop-types';
 import Tag from 'components/common/Tag';
 import MarkdownRender from 'components/common/MarkdownRender';
 
-const PostDetailContent = ({ post, handleDelete, handleModify }) => (
+const PostDetailContent = ({ post, isAdmin, handleDelete, handleModify }) => (
   <div>
     <div className={styles.info}>
       <img
@@ -24,14 +24,16 @@ const PostDetailContent = ({ post, handleDelete, handleModify }) => (
       <div className={styles.title}>{post.title}</div>
       {/* <div className={styles.subtitle}>{post.subtitle}</div> */}
     </div>
-    <div className={styles.buttons}>
-      <div className={styles.button}>
-        <span onClick={handleDelete}>삭제</span>
+    {isAdmin && (
+      <div className={styles.buttons}>
+        <div className={styles.button}>
+          <span onClick={handleDelete}>삭제</span>
+        </div>
+        <div className={styles.button}>
+          <span onClick={handleModify}>수정</span>
+        </div>
       </div>
-      <div className={styles.button}>
-        <span onClick={handleModify}>수정</span>
-      </div>
-    </div>
+    )}
     <img
       className={styles.thumbnail}
       src={

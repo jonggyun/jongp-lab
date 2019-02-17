@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import UserPost from 'components/UserPost';
 import UserPostDetail from 'components/UserPostDetail';
+import UserAbout from 'components/UserAbout';
 
 import AdminLogin from 'components/AdminLogin';
 import AdminMain from 'components/AdminMain';
@@ -42,6 +43,7 @@ const PrivateRoutes = props => {
 const PublicRoutes = props => (
   <Switch>
     <Route exact path="/" component={UserPost} />
+    <Route exact path="/about" component={UserAbout} />
     <Route path="/post/:postId" component={UserPostDetail} />
     <Route exact path="/admin" component={AdminLogin} />
   </Switch>

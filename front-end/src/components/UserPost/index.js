@@ -21,8 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     getCategoryPosts: categoryId =>
       dispatch(userPostsActions.getCategoryPosts(categoryId)),
     setUserPost: () => dispatch(userPostsActions.setUserPost()),
-    getOldPosts: lastPostId =>
-      dispatch(userPostsActions.getOldPosts(lastPostId)),
+    getOldPosts: (lastPostId, selectedCategory) =>
+      dispatch(userPostsActions.getOldPosts(lastPostId, selectedCategory)),
     setUserPosts: () => dispatch(userPostsActions.setUserPosts()),
   };
 };

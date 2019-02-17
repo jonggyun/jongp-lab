@@ -1,18 +1,17 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import UserHeader from 'components/common/UserHeader';
 import PostThumbnailExp from 'components/common/PostThumbnailExp';
 
-const UserPost = ({ categories, posts, handlePosts }) => (
+const UserPost = ({ categories, posts, handleClick }) => (
   <section className={styles.wrapper}>
     <UserHeader />
     <div className={styles.content}>
       <div className={styles.left}>
         <nav className={styles.categories}>
-          <ul onClick={handlePosts}>
+          <ul onClick={handleClick}>
             <li name="all">All</li>
             {categories && <Categoires categories={categories} />}
           </ul>
@@ -26,7 +25,7 @@ const UserPost = ({ categories, posts, handlePosts }) => (
 UserPost.propType = {
   categoires: PropTypes.array.isRequired,
   posts: PropTypes.array.isRequired,
-  handlePosts: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 const Categoires = ({ categories }) =>
