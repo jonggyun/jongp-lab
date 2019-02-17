@@ -62,7 +62,7 @@ const usernameLogin = (id, password) => {
 const getAdminAbout = () => {
   return (dispatch, getState) => {
     const {
-      user: { token },
+      admin: { token },
     } = getState();
     fetch('/admin/about', {
       method: 'GET',

@@ -4,9 +4,8 @@ import Container from './container';
 import { actionCreators as adminActions } from 'redux/modules/admin';
 
 const mapStateToProps = (state, ownProps) => {
-  const {
-    user: { about },
-  } = state;
+  console.log('state', state);
+  const { about } = state.admin;
   return {
     about,
   };
